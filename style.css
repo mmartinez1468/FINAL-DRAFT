@@ -1,0 +1,892 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+:root {
+    --colorprimary : #ffffff;
+    --colorsecondary : #000000;
+    --darkmodeprimary : #ffffff;
+    --darkmodesecondary : #000000;
+    --coloraccent : #7c7a7a;
+    --coloraccentlight : #373535;
+    --coloraccentdark : #000000;
+    --fontfamily : "Oswald", sans-serif;
+    --h1 : bold 54px/64px var(--fontfamily);
+    --h2 : bold 36px/36px var(--fontfamily);
+    --h3 : bold 24px/30px var(--fontfamily);
+    --links : bold 18px/18px var(--fontfamily);
+    --p : 18px/30px var(--fontfamily);
+    --subtext : 12px/20px var(--fontfamily);
+    --transition : 0.3s ease-in-out;
+    --shadow: #00000030 0px 0px 10px 0px;
+    --shadowdark: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+* {
+    transition: background-color var(--transition), 
+                color var(--transition), 
+                border-color var(--transition), 
+                fill var(--transition),
+                box-shadow var(--transition);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* Document setup */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--fontfamily);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--colorprimary);
+  background-color: var(--colorsecondary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: color var(--transition), background-color var(--transition);
+}
+/* Dark mode setup */
+@media (prefers-color-scheme: dark) {
+  body {
+    color: var(--darkmodeprimary);
+    background-color: var(--darkmodesecondary);
+  }
+}
+/* Typography reset */
+h1 {
+  font: var(--h1);
+}
+h2 {
+  font: var(--h2);
+}
+h3 {
+  font: var(--h3);
+}
+p {
+  font: var(--p);
+}
+small, .small-text {
+  font: var(--subtext);
+}
+/* Links */
+a {
+  font: var(--links);
+  color: var(--coloraccent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+/* Lists */
+ul, ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  list-style-type: none;
+}
+li {
+  margin-bottom: 0.5rem;
+}
+/* Images */
+img, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+/* Buttons */
+button, 
+input[type="button"], 
+input[type="reset"], 
+input[type="submit"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+/* Form elements */
+input, 
+textarea, 
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  border-radius: 0;
+}
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  text-align: left;
+  padding: 0.5rem;
+}
+/* Remove animations for people who've requested reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* Only show focus outlines for keyboard users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--coloraccent);
+  outline-offset: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+/************************ ANIMATIONS ****************************/
+.animate {
+  opacity: 0;
+  will-change: transform, opacity;
+  visibility: visible;
+}
+
+/* Animation state when element becomes visible */
+.animate.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animations */
+.fade-in {
+  transition: opacity 0.6s ease;
+}
+
+.slide-up {
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.slide-down {
+  transform: translateY(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.slide-left {
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.slide-right {
+  transform: translateX(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scale-up {
+  transform: scale(0.8);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.zoom-in {
+  transform: scale(0.5);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.zoom-out {
+  transform: scale(1.2);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.flip-x {
+  transform: rotateX(90deg);
+  backface-visibility: hidden;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.flip-y {
+  transform: rotateY(90deg);
+  backface-visibility: hidden;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Combined animations */
+.slide-up-scale {
+  transform: translateY(100px) scale(0.8);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.slide-down-scale {
+  transform: translateY(-30px) scale(0.8);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.slide-left-scale {
+  transform: translateX(-30px) scale(0.8);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.slide-right-scale {
+  transform: translateX(30px) scale(0.8);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* You can also create your own custom combined animations */
+.custom-combo {
+  transform: translateY(20px) scale(0.9) rotate(5deg);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Durations */
+.duration-300 {
+  transition-duration: 0.3s;
+}
+
+.duration-500 {
+  transition-duration: 0.5s;
+}
+
+.duration-800 {
+  transition-duration: 0.8s;
+}
+
+.duration-1000 {
+  transition-duration: 1s;
+}
+
+.duration-1500 {
+  transition-duration: 1.5s;
+}
+
+/* Delays */
+.delay-100 {
+  transition-delay: 0.1s;
+}
+
+.delay-200 {
+  transition-delay: 0.2s;
+}
+
+.delay-300 {
+  transition-delay: 0.3s;
+}
+
+.delay-500 {
+  transition-delay: 0.5s;
+}
+
+.delay-700 {
+  transition-delay: 0.7s;
+}
+
+/* Easing functions */
+.ease-linear {
+  transition-timing-function: linear;
+}
+
+.ease-in {
+  transition-timing-function: cubic-bezier(0.42, 0, 1.0, 1.0);
+}
+
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.58, 1.0);
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1.0);
+}
+
+.ease-bounce {
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* Base Mobile-First Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--colorsecondary);
+            position: fixed; /* Change from relative to fixed */
+            top: 0; /* Position at the top of the viewport */
+            left: 0; /* Ensure it spans the full width */
+            right: 0;
+            width: 100%; /* Make sure it's full width */
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            z-index: 102;
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .nav-menu {
+            position: fixed;
+            left: -100%;
+            top: 70px;
+            flex-direction: column;
+            background-color: var(--colorsecondary);
+            width: 100%;
+            height: calc(100vh - 70px);
+            padding: 1rem 0;
+            text-align: start;
+            transition: all var(--transition);
+            box-shadow: var(--shadowdark);
+            overflow-y: auto;
+            z-index: 101;
+            display: flex;
+            list-style: none;
+            margin: 0;
+        }
+        
+        .nav-menu.active {
+            left: 0;
+        }
+        
+        .nav-item {
+            position: relative;
+            width: 100%;
+        }
+        
+        .nav-link {
+            font: var(--links);
+            color: var(--coloraccent);
+            padding: 0.5rem 1rem;
+            display: block;
+            transition: color var(--transition);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: var(--colorprimary);
+        }
+
+        .nav-link.active {
+            color: var(--colorprimary);
+        }
+        
+        .dropdown-toggle {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        
+        .dropdown {
+            max-height: 0;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.2);
+            width: 100%;
+            transition: max-height 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+            list-style: none;
+            opacity: 0;
+        }
+        
+        .dropdown.active {
+            max-height: 1000px;
+            opacity: 1;
+            transition: max-height 0.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease;
+            padding-left: 0;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            transition-delay: 0s;
+        }
+        
+        .dropdown.active .dropdown-item {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.2s;
+        }
+        
+        .dropdown.active .dropdown-item:nth-child(2) {
+            transition-delay: 0.25s;
+        }
+        
+        .dropdown.active .dropdown-item:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .dropdown.active .dropdown-item:nth-child(4) {
+            transition-delay: 0.35s;
+        }
+        
+        .dropdown-link {
+            color: var(--colorprimary);
+            font: var(--subtext);
+            font-weight: bold;
+            text-decoration: none;
+            transition: color var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-left: .5rem;
+        }
+        
+        .dropdown-item-info > span {
+            display: none;
+        }
+
+        .dropdown-item-info > p {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        .dropdown-link > svg {
+            height: 20px;
+        }
+
+        
+        
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: transparent;
+            border: none;
+            z-index: 102;
+        }
+        
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--colorprimary);
+            transition: all var(--transition);
+        }
+        
+        .hamburger.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        
+        
+        /* Desktop Styles */
+        @media (min-width: 993px) {
+        .navbar {
+            padding: 1rem 2rem;
+        }
+        
+        .hamburger {
+            display: none;
+        }
+        
+        .nav-menu {
+            position: static;
+            flex-direction: row;
+            background-color: transparent;
+            width: auto;
+            height: auto;
+            padding: 0;
+            box-shadow: none;
+            overflow-y: visible;
+        }
+        
+        .nav-item {
+            width: auto;
+            margin: 0 0.5rem;
+            position: relative; /* Ensure position relative for proper dropdown positioning */
+        }
+
+        /* Keep nav-link highlighted when hovering its dropdown */
+        .nav-item:hover .nav-link {
+            color: var(--colorprimary);
+        }
+
+        .nav-link {
+            padding: 0;
+        }
+        
+        .dropdown {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            top: 100%;
+            left: 50%; /* Position from center of parent */
+            transform: translateX(-50%); /* Center the dropdown */
+            background-color: rgba(21, 21, 21, 0.664);
+            width: 250px;
+            margin-top: 1rem;
+            box-shadow: var(--shadowdark);
+            border-radius: 10px;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            max-height: none;
+            overflow: visible;
+            padding-left: 0;
+            padding: 1rem;
+            z-index: 105; /* Ensure dropdown is above other elements */
+        }
+        
+        .dropdown-item {
+            opacity: 1;
+            transform: translateY(0);
+            transition: none;
+            margin-bottom: 0;
+            padding: 0;
+        }
+        
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0); /* Maintain horizontal centering while removing vertical offset */
+        }
+        
+        .dropdown-toggle::after {
+            transition: none;
+        }
+        
+        .dropdown-toggle.active::after {
+            transform: none;
+        }
+
+        .dropdown-item-info > span {
+            display: block;
+            color: var(--coloraccent);
+        }
+
+        .dropdown-item-info > p {
+            line-height: 1.5;
+        }
+
+        .dropdown-link {
+            gap: .75rem;
+        }
+
+        .dropdown-link > svg {
+            min-width: 24px;
+            min-height: 24px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(64, 62, 62, 0.8);
+            border-radius: 8px;
+            padding: 0.25rem;
+            fill: rgb(255, 255, 255);
+        }
+
+        .dropdown-link:hover > svg {
+            background-color: var(--colorprimary);
+            fill: var(--colorsecondary);
+        }
+
+        .dropdown-item-info:hover > span {
+            color: var(--colorprimary);
+        }
+
+        .theme-toggle {
+          margin-left: unset !important;
+        }
+    }
+    @media screen and (min-width: 1248px) {
+        header {
+            display: flex;
+            justify-content: center;
+            background-color: var(--colorprimary);
+        }
+        .navbar {
+          padding: 1rem 10rem;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.theme-toggle {
+    margin-left: auto;
+    padding-right: 1rem;
+    z-index: 102;
+}
+
+#theme-switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: background-color var(--transition);
+    color: var(--colorsecondary);
+    background-color: var(--colorprimary);
+}
+
+#theme-switch:hover {
+  color: var(--colorprimary);
+  background-color: var(--colorsecondary);
+}
+
+#theme-switch svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* The icons switch based on theme */
+body:not(.light-mode) .sun-icon,
+body.light-mode .moon-icon {
+    display: none;
+}
+
+/* Light mode colors */
+body.light-mode {
+    color: var(--colorsecondary);
+    background-color: var(--colorprimary);
+}
+
+body.light-mode .navbar {
+    background-color: var(--colorprimary);
+}
+
+body.light-mode .nav-menu {
+    background-color: var(--colorprimary);
+}
+
+body.light-mode .bar {
+    background-color: var(--colorsecondary);
+}
+
+body.light-mode .dropdown {
+    background-color: rgba(240, 240, 240, 0.9);
+}
+
+body.light-mode .nav-link:hover {
+    color: var(--colorsecondary);
+}
+
+body.light-mode .nav-link.active {
+  color: var(--colorsecondary);
+}
+
+
+
+
+
+
+body.light-mode .dropdown-link > svg {
+    fill: var(--colorsecondary);
+}
+
+
+
+
+body.light-mode .dropdown-item-info > p {
+    color: var(--coloraccent);
+}
+
+@media (min-width: 993px) {
+    body.light-mode .dropdown {
+      background-color: rgba(255, 255, 255, 0.451);
+    }
+
+    body.light-mode .dropdown-link > svg {
+      fill: var(--colorprimary);
+      background-color: var(--colorsecondary);
+    }
+
+    body.light-mode .dropdown-link:hover > svg {
+      background-color: var(--coloraccent);
+      fill: var(--colorprimary);
+    }
+
+    body.light-mode .dropdown-item-info > p {
+      color: var(--colorsecondary);
+    }
+
+    body.light-mode .dropdown-item-info:hover > span {
+      color: var(--colorsecondary);
+    }
+
+    body.light-mode .nav-item .nav-link {
+      color: var(--colorsecondary);
+    }
+
+    body.light-mode .nav-item:hover .nav-link {
+      color: var(--coloraccent);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#landing {
+    height: 100vh;
+    background-color: red;
+    margin-top: 4.8rem;
+}
+
+.landing-intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: .75rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    width: fit-content; 
+    margin: 0 auto; 
+    height: 40%;
+}
+
+.landing-intro p {
+    text-transform: uppercase;
+}
+
+.landing-intro h2 {
+    font-weight: 500;
+    width: fit-content; 
+}
+
+.landing-intro p {
+
+}
+
+.landing-intro p:nth-of-type(2) {
+    max-width: 90%; 
+    width: 100%; 
+}
+
+
+
+
+
+
+
+
+.landing-buttons {
+
+}
+
+.landing-button-1 {
+    border-radius: 30px;
+    padding: .25rem 1.5rem;
+    background-color: var(--colorsecondary);
+    color: var(--colorprimary);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all var(--transition);
+}
+
+.landing-button-1:hover {
+    background-color: var(--colorprimary);
+    color: var(--colorsecondary);
+}
+
+.landing-button-2 {
+    display: none;
+    border-radius: 30px;
+    padding: .25rem 1.5rem;
+    background-color: var(--coloraccent);
+    color: var(--colorprimary);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all var(--transition);
+}
+
+.landing-button-2:hover {
+    background-color: var(--coloraccentlight);
+    color: var(--colorprimary);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.landing-image {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 30%;
+    border: white 1px solid;
+}
+.landing-image img {
+    border-radius: 10px;
+}

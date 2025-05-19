@@ -80,6 +80,26 @@
 
 
 
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Intersection Observer to handle animations when elements enter viewport
 document.addEventListener('DOMContentLoaded', function() {
   // Get all elements with the 'animate' class
@@ -235,13 +255,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isYearly) {
                     priceElement.innerHTML = `
                         <p>$${yearlyPrice} /year</p>
-                        <p style="font-size: 14px; color: #aaa; margin-top: 5px;">
+                        <p style="font-size: 14px; color: #7c7a7a; margin-top: 5px;">
                             Save $${yearlySavings} (${savingsPercent}% off)
                         </p>`;
                 } else {
                     priceElement.innerHTML = `
                         <p>$${monthlyPrice} /month</p>
-                        <p style="font-size: 14px; color: #aaa; margin-top: 5px;">
+                        <p style="font-size: 14px; color: #7c7a7a; margin-top: 5px;">
                             $${monthlyPrice * 12} /year (Save ${savingsPercent}% yearly)
                         </p>`;
                 }
@@ -699,4 +719,82 @@ document.addEventListener('DOMContentLoaded', function() {
     webButton.classList.remove('active');
     updatePricingCards(mediaData, mediaServicesData);
   });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Only apply on desktop (matching your media query)
+  if (window.innerWidth >= 993) {
+    // Select ALL pricing-explained elements
+    const pricingExplainedElements = document.querySelectorAll('.pricing-card .pricing-explained');
+    
+    // Create a sentinel element to trigger the hiding
+    const sentinel = document.createElement('div');
+    sentinel.style.height = '1px';
+    sentinel.style.width = '100%';
+    sentinel.style.position = 'absolute';
+    sentinel.style.top = '100px'; // Adjust this value as needed
+    sentinel.style.visibility = 'hidden';
+    document.body.appendChild(sentinel);
+    
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) {
+        // When scrolled down, add the hidden class to ALL pricing-explained elements
+        pricingExplainedElements.forEach(element => {
+          element.classList.add('hidden');
+        });
+      } else {
+        // When scrolled back up, remove the hidden class from ALL elements
+        pricingExplainedElements.forEach(element => {
+          element.classList.remove('hidden');
+        });
+      }
+    }, {
+      threshold: 0,
+      rootMargin: '0px'
+    });
+    
+    observer.observe(sentinel);
+  }
 });

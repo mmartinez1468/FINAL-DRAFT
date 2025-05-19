@@ -1298,6 +1298,7 @@ body.light-mode .dropdown-item-info > p {
   .pricing-wrapper {
     flex-direction: row;
     padding: 0 1rem;
+    padding-top: 10px;
     position: sticky;
     top: 70px;
     z-index: 10;
@@ -1308,8 +1309,28 @@ body.light-mode .dropdown-item-info > p {
   }
 
   .pricing-services {
-    padding: 0 1rem;
+    padding: 6rem 1rem;
   }
+
+  .pricing-explained {
+    /* Initial state */
+    overflow: hidden;
+    max-height: 200px; /* Adjust based on your content's actual height */
+    opacity: 1;
+    transform: translateY(0);
+    transition: max-height 0.3s ease-out, 
+                opacity 0.25s ease-out,
+                transform 0.3s ease-out;
+  }
+  
+  .pricing-explained.hidden {
+    /* Animated closed state */
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none; /* Prevents interaction while hidden */
+  }
+
 }
 
 @media screen and (min-width: 1024px) {
@@ -1335,6 +1356,236 @@ body.light-mode .dropdown-item-info > p {
     width: 70%;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Light mode styles for pricing section */
+
+/* Basic pricing section background */
+body.light-mode #pricing {
+    color: var(--colorsecondary);
+    background-color: var(--colorprimary);
+}
+
+body.light-mode .pricing-wrapper {
+  background-color: var(--colorprimary);
+}
+
+/* Pricing intro section */
+body.light-mode .pricing-intro > h2,
+body.light-mode .pricing-intro > p {
+    color: var(--colorsecondary);
+}
+
+/* Switch plans buttons */
+body.light-mode .switch-plans-web .knife-edge-border,
+body.light-mode .switch-plans-media .knife-edge-border {
+    background-color: var(--colorsecondary);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--colorprimary);
+}
+
+body.light-mode .switch-plans-web.active .knife-edge-border,
+body.light-mode .switch-plans-media.active .knife-edge-border {
+    background-color: var(--colorprimary);
+    color: var(--colorsecondary);
+}
+
+/* Pricing cards - general */
+body.light-mode .pricing-card {
+    background-color: var(--colorprimary);
+    color: var(--colorsecondary);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Pricing card name and cost */
+body.light-mode .pricing-card-name h3,
+body.light-mode .pricing-card-cost p {
+    color: var(--colorsecondary);
+}
+
+/* Toggle text and switch */
+body.light-mode .toggle-text {
+    color: var(--colorsecondary);
+}
+
+body.light-mode .toggle-switch {
+    background-color: #e0e0e0;
+    border: 1px solid #969393;
+}
+
+body.light-mode .toggle-switch .toggle-circle {
+    background-color: #000000;
+}
+
+body.light-mode .toggle-switch.active {
+    background-color: #d4eaff;
+    border: 1px solid #a8d4ff;
+}
+
+body.light-mode .toggle-switch.active .toggle-circle {
+    background-color: #0088cc;
+}
+
+/* Pricing explained lists */
+body.light-mode .pricing-explained li p {
+    color: var(--colorsecondary);
+}
+
+body.light-mode .pricing-explained li > svg {
+    background-color: #e0e0e0;
+    fill: #00aa00;
+}
+
+body.light-mode #changeSVG {
+    background-color: #e0e0e0;
+    fill: #ee0000;
+}
+
+/* Pricing buttons */
+body.light-mode .pricing-button {
+    background-color: var(--colorsecondary);
+    color: var(--colorprimary);
+}
+
+body.light-mode .pricing-button:hover {
+    background-color: var(--coloraccentdarker);
+}
+
+body.light-mode #pricingButton {
+    background-color: #00aaff;
+    color: white;
+}
+
+body.light-mode #pricingButton:hover {
+    background-color: #0088cc;
+}
+
+/* Pricing depth mobile section */
+body.light-mode .pricing-depth-mobile {
+    background-color: var(--colorprimary);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .pricing-depth-intro {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .pricing-depth-intro h3 {
+    color: var(--colorsecondary);
+}
+
+body.light-mode .pricing-depth-card {
+    color: var(--colorsecondary);
+}
+
+body.light-mode .pricing-depth-card:nth-child(2) {
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Services section */
+body.light-mode .pricing-services {
+    color: var(--colorsecondary);
+}
+
+body.light-mode .pricing-services-intro {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .pricing-services-intro > h3 {
+    color: var(--colorsecondary);
+}
+
+body.light-mode .pricing-services-intro > svg {
+    fill: var(--colorsecondary);
+}
+
+body.light-mode .pricing-services-wrapper {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .pricing-services-name > p {
+    color: #666;
+}
+
+body.light-mode .services-explained-card > p {
+    color: var(--colorsecondary);
+}
+
+body.light-mode .services-explained-card > svg {
+    fill: #00aa00;
+}
+
+body.light-mode #checkmarkNo {
+    fill: #999;
+}
+
+/* Knife-edge border for fancy card */
+body.light-mode .knife-edge-border {
+    background-color: var(--colorprimary);
+    color: var(--colorsecondary);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .knife-edge-border::before,
+body.light-mode .knife-edge-border::after {
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
+}
+
+/* Gradient card in light mode */
+body.light-mode .knife-edge-border.gradient-card {
+    background: white;
+}
+
+body.light-mode .black-blue-gradient {
+    background: var(--colorprimary);
+}
+
+/* Popular tag */
+body.light-mode .pricing-popular {
+    background-color: #00aaff;
+    color: white;
+    box-shadow: 0 0 10px 3px rgba(0, 170, 255, 0.4), 0 0 15px 5px rgba(0, 170, 255, 0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -293,6 +293,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    // Word rotation animation with instant disappearance
+    const words = ["Websites", "Applications", "Solutions", "Experiences", "Innovations"];
+    const wordElement = document.getElementById('rotating-word');
+    let currentIndex = 0;
+    
+    // Start the word rotation
+    startWordRotation();
+    
+    function startWordRotation() {
+        setInterval(() => {
+            // Hide the current word instantly
+            wordElement.classList.add('word-hidden');
+            wordElement.classList.remove('word-visible');
+            
+            // After a short delay, show the next word
+            setTimeout(() => {
+                // Change to next word
+                currentIndex = (currentIndex + 1) % words.length;
+                wordElement.textContent = words[currentIndex];
+                
+                // Make the new word visible with animation
+                wordElement.classList.remove('word-hidden');
+                wordElement.classList.add('word-visible');
+            }, 200);
+        }, 3000); // Change word every 3 seconds
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
 
 
 

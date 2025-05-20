@@ -7,6 +7,7 @@
     --coloraccent : #7c7a7a;
     --coloraccentlight : #373535;
     --coloraccentdark : #000000;
+    --colorborder : rgba(255, 255, 255, 0.1);
     --fontfamily : "Oswald", sans-serif;
     --h1 : bold 54px/64px var(--fontfamily);
     --h2 : bold 36px/36px var(--fontfamily);
@@ -345,7 +346,7 @@ th, td {
 .gradient {
         position: absolute;
         border-radius: 100%;
-        opacity: 0.33;
+        opacity: 0.6;
         mix-blend-mode: screen;
         animation-iteration-count: infinite;
         animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
@@ -353,104 +354,103 @@ th, td {
 
       
   .gradient-1 {
-    background: rgb(0, 170, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    background: rgb(42, 11, 174) none repeat scroll 0% 0% / auto padding-box border-box;
     width: 700px;
     height: 700px;
-    animation-duration: 17s;
-    opacity: 0.3;
+    animation-duration: 11s;
+    opacity: 0.6;
     left: 60%;
     top: 40%;
     z-index: -2;
     animation-name: animation-gradient-1;
   }
   .gradient-2 {
-    background: rgb(55, 4, 92) none repeat scroll 0% 0% / auto padding-box border-box;
+    background: rgb(137, 167, 240) none repeat scroll 0% 0% / auto padding-box border-box;
     width: 600px;
     height: 600px;
-    animation-duration: 21s;
-    opacity: 0.69;
+    animation-duration: 11s;
+    opacity: 0.6;
     left: 40%;
     top: 60%;
     z-index: -1;
     animation-name: animation-gradient-2;
   }
   .gradient-3 {
-    background: rgb(0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
+    background: rgb(246, 26, 95) none repeat scroll 0% 0% / auto padding-box border-box;
     width: 500px;
     height: 500px;
-    animation-duration: 12s;
-    opacity: 1;
+    animation-duration: 11s;
+    opacity: 0.6;
     left: 50%;
     top: 50%;
     z-index: -3;
     animation-name: animation-gradient-3;
   }
 
-@keyframes animation-gradient-1 {
-  0% {
-    transform: translateY(-50%) translateX(-50%) rotate(-20deg) translateX(20%);
-  }
-  25% {
-    transform: translateY(-50%) translateX(-50%) skew(-15deg, -15deg)
-      rotate(80deg) translateX(30%);
-  }
-  50% {
-    transform: translateY(-50%) translateX(-50%) rotate(180deg) translateX(25%);
-  }
-  75% {
-    transform: translateY(-50%) translateX(-50%) skew(15deg, 15deg)
-      rotate(240deg) translateX(15%);
-  }
-  100% {
-    transform: translateY(-50%) translateX(-50%) rotate(340deg) translateX(20%);
-  }
-}
-
-@keyframes animation-gradient-2 {
-  0% {
-    transform: translateY(-50%) translateX(-50%) rotate(40deg) translateX(-20%);
-  }
-  25% {
-    transform: translateY(-50%) translateX(-50%) skew(15deg, 15deg)
-      rotate(110deg) translateX(-5%);
-  }
-  50% {
-    transform: translateY(-50%) translateX(-50%) rotate(210deg) translateX(-35%);
-  }
-  75% {
-    transform: translateY(-50%) translateX(-50%) skew(-15deg, -15deg)
-      rotate(300deg) translateX(-10%);
-  }
-  100% {
-    transform: translateY(-50%) translateX(-50%) rotate(400deg) translateX(-20%);
-  }
-}
-
-@keyframes animation-gradient-3 {
-  0% {
-    transform: translateY(-50%) translateX(-50%) translateX(-15%)
-      translateY(10%);
-  }
-  20% {
-    transform: translateY(-50%) translateX(-50%) translateX(20%)
-      translateY(-30%);
-  }
-  40% {
-    transform: translateY(-50%) translateX(-50%) translateX(-25%)
-      translateY(-15%);
-  }
-  60% {
-    transform: translateY(-50%) translateX(-50%) translateX(30%) translateY(20%);
-  }
-  80% {
-    transform: translateY(-50%) translateX(-50%) translateX(5%) translateY(35%);
-  }
-  100% {
-    transform: translateY(-50%) translateX(-50%) translateX(-15%)
-      translateY(10%);
-  }
-}
-
+      @keyframes animation-gradient-1 {
+        0% {
+          transform: translateY(-50%) translateX(-50%) rotate(-20deg) translateX(20%);
+        }
+        25% {
+          transform: translateY(-50%) translateX(-50%) skew(-15deg, -15deg)
+            rotate(80deg) translateX(30%);
+        }
+        50% {
+          transform: translateY(-50%) translateX(-50%) rotate(180deg) translateX(25%);
+        }
+        75% {
+          transform: translateY(-50%) translateX(-50%) skew(15deg, 15deg)
+            rotate(240deg) translateX(15%);
+        }
+        100% {
+          transform: translateY(-50%) translateX(-50%) rotate(340deg) translateX(20%);
+        }
+      }
+      
+      @keyframes animation-gradient-2 {
+        0% {
+          transform: translateY(-50%) translateX(-50%) rotate(40deg) translateX(-20%);
+        }
+        25% {
+          transform: translateY(-50%) translateX(-50%) skew(15deg, 15deg)
+            rotate(110deg) translateX(-5%);
+        }
+        50% {
+          transform: translateY(-50%) translateX(-50%) rotate(210deg) translateX(-35%);
+        }
+        75% {
+          transform: translateY(-50%) translateX(-50%) skew(-15deg, -15deg)
+            rotate(300deg) translateX(-10%);
+        }
+        100% {
+          transform: translateY(-50%) translateX(-50%) rotate(400deg) translateX(-20%);
+        }
+      }
+      
+      @keyframes animation-gradient-3 {
+        0% {
+          transform: translateY(-50%) translateX(-50%) translateX(-15%)
+            translateY(10%);
+        }
+        20% {
+          transform: translateY(-50%) translateX(-50%) translateX(20%)
+            translateY(-30%);
+        }
+        40% {
+          transform: translateY(-50%) translateX(-50%) translateX(-25%)
+            translateY(-15%);
+        }
+        60% {
+          transform: translateY(-50%) translateX(-50%) translateX(30%) translateY(20%);
+        }
+        80% {
+          transform: translateY(-50%) translateX(-50%) translateX(5%) translateY(35%);
+        }
+        100% {
+          transform: translateY(-50%) translateX(-50%) translateX(-15%)
+            translateY(10%);
+        }
+      }
 
 
 
@@ -968,6 +968,7 @@ body.light-mode .dropdown-item-info > p {
 #landing {
     height: 80vh;
     margin-top: 5rem;
+    background-color: black;
 }
 
 .landing-intro {
@@ -983,13 +984,14 @@ body.light-mode .dropdown-item-info > p {
     height: 50%;
 }
 
-.landing-intro p {
+.intro-icon {
     text-transform: uppercase;
     background-color: #F0F0F01A;
     padding: 0rem .75rem;
     border-radius: 30px;
     font-size: .75rem;
     border: 1px solid #313131;
+    width: fit-content;
 }
 
 .landing-intro h2 {
@@ -1257,9 +1259,81 @@ body.light-mode .dropdown-item-info > p {
 
 .landing-stats {
   width: 100%;
-  background-color: black;
+  background-color: #000000;
   height: 10em;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Wave separators */
+.wave-separator, .wave-separator-2 {
+  display: block;
+  width: 100%;
+  height: 120px;
+  position: relative;
+  margin-top: -2px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+svg {
+  height: 100%;
+}
+
+.wave-separator svg {
+  width: 100%;
+  height: 100%;
+  background-color: var(--colorsecondary);
+}
+
+.wave-separator-2 svg {
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.circle-divider {
+  display: block;
+  width: 100%;
+  height: 30px;
+  position: relative;
+  margin-top: -1px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.circle-divider svg {
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .wave-separator, .wave-separator-2 {
+    height: 2000px;
+  }
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -1300,7 +1374,7 @@ body.light-mode .dropdown-item-info > p {
   }
 
   .landing-image img {
-    opacity: .5;
+    opacity: 1;
   }
 
   .animated-word {
@@ -1329,6 +1403,10 @@ body.light-mode .dropdown-item-info > p {
 }
 
 @media screen and (min-width: 1024px) {
+  #landing {
+    background-color: unset;
+  }
+  
   .landing-intro {
     height: 60%;
   }
@@ -1340,7 +1418,7 @@ body.light-mode .dropdown-item-info > p {
   }
 
   .landing-image img {
-    opacity: .8;
+    opacity: 1;
   }
 }
 
@@ -1367,6 +1445,10 @@ body.light-mode .dropdown-item-info > p {
   .landing-button-1, .landing-button-2 {
     font-size: 1.25rem;
     padding: .75rem 2rem;
+  }
+
+  .landing-image {
+    padding: 0 10rem;
   }
 }
 
@@ -1499,18 +1581,335 @@ body.light-mode .dropdown-item-info > p {
 
 
 
+/* Add this to your CSS file */
+/* Add this to your CSS file */
 
-
-
-
-
-
-
-
-
-
-
+/* Ensure proper section layout */
+#landing {
+  position: relative;
+  /* Keep original height - don't modify */
+  margin-bottom: 0;
+  z-index: 1;
+}
 
 #variety {
-  height: 100em;
+  position: relative;
+  z-index: 1;
+  /* Explicitly set top position to start after landing */
+  margin-top: 5vh; /* Base value for mobile - reduced to prevent too much space */
+}
+
+/* Preserve landing image and shadow */
+.landing-image {
+  position: relative;
+  /* Keep all existing styles as is */
+}
+
+.landing-image::after {
+  /* Keep shadow as is - don't modify */
+}
+
+/* Stats section positioning */
+.landing-stats {
+  position: relative;
+  /* Keep original height - don't modify */
+  z-index: 1;
+}
+
+/* Responsive adjustments */
+@media screen and (min-width: 768px) {
+  #variety {
+    /* Adjust this value if the landing section height changes at this breakpoint */
+    margin-top: 46vh; /* Larger value for desktop */
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #variety {
+    margin-top: 70vh; /* Full viewport height for larger screens */
+  }
+}
+@media screen and (min-width: 419px) and (max-width: 767px) {
+  #variety {
+    margin-top: 15vh; /* Adjusted for small tablets/large phones */
+  }
+}
+@media screen and (min-width: 1440px) {
+  #variety {
+    margin-top: 85vh; /* Adjusted for small tablets/large phones */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Variety Section Styles - Isolated to prevent navbar conflicts */
+#variety {
+    padding: 3rem 0rem;
+    position: relative;
+}
+
+.variety-intro {
+    margin-bottom: 2rem;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.variety-intro h2 {
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+/* Slider Container */
+.variety-slider-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Slider Wrapper */
+.variety-slider-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+/* Images Container - With overflow hidden for sliding effect */
+.variety-slider-images {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.1);;
+    border-radius: 10px;
+    height: 175px; /* Default height for mobile */
+}
+
+/* Slider Track - This is what moves */
+.variety-slider-track {
+    display: flex;
+    width: 500%; /* 100% * number of slides */
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.variety-slider-image {
+    position: relative;
+    width: 20%; /* 100% / number of slides */
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.variety-slider-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: 3px solid var(--colorborder);
+}
+
+/* Navigation Buttons Under Images */
+.variety-nav-buttons {
+    display: none;
+    justify-content: end;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+}
+
+.variety-nav-button {
+    display: flex;
+    align-items: center;
+    background-color: #000000;
+    color: var(--colorprimary);
+    cursor: pointer;
+    transition: all var(--transition);
+    border-radius: 50%;
+    border: 1px solid var(--colorborder);
+}
+
+.variety-nav-button svg {
+    width: 20px;
+    height: 20px;
+    transition: transform var(--transition);
+}
+
+
+.variety-nav-button:hover.variety-prev svg {
+    transform: translateX(-3px);
+}
+
+.variety-nav-button:hover.variety-next svg {
+    transform: translateX(3px);
+}
+
+/* Text Navigation */
+.variety-slider-nav {
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 auto;
+    gap: .75rem;
+}
+
+.variety-nav-item {
+    cursor: pointer;
+    transition: all var(--transition);
+    border-radius: 5px;
+    font-weight: 500;
+    position: relative;
+    font-size: 0.8rem;
+    text-align: center;
+    color: var(--coloraccent);
+}
+
+.variety-nav-item:hover {
+    color: var(--colorprimary);
+}
+
+.variety-nav-item.variety-active {
+    color: var(--colorprimary);
+    transform: scale(1.05);
+}
+
+/* Light mode adjustments */
+body.light-mode .variety-slider-nav,
+body.light-mode .variety-nav-button {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: var(--colorsecondary);
+}
+
+body.light-mode .variety-nav-item:hover,
+body.light-mode .variety-nav-button:hover {
+    color: var(--colorsecondary);
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .variety-nav-item.variety-active {
+    color: var(--colorprimary);
+    background-color: var(--colorsecondary);
+}
+
+@media screen and (min-width: 427px) {
+  .variety-slider-images {
+    height: 225px; /* Default height for mobile */
+  }
+}
+
+@media screen and (min-width: 619px) {
+  .variety-slider-images {
+    height: 275px; /* Default height for mobile */
+  }
+}
+
+/* Responsive Adjustments - Using min-width media queries */
+@media screen and (min-width: 768px) {
+    .variety-slider-container {
+        width: 85%;
+    }
+    
+    .variety-slider-images {
+        height: 300px;
+    }
+    
+    .variety-nav-item {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .variety-nav-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+    }
+    
+    .variety-nav-button svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .variety-slider-container,
+    .variety-intro {
+        width: 85%;
+    }
+
+    .variety-intro > h2 {
+      font-size: 3rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .variety-slider-container {
+        width: 80%;
+    }
+
+    .variety-slider-nav {
+      width: 100%;
+      margin: unset;
+    }
+    
+    .variety-slider-images {
+        height: 400px;
+    }
+    
+    .variety-nav-item {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+
+    .variety-nav-buttons {
+      display: flex;
+    }
+    
+    .variety-nav-button {
+        font-size: 1.1rem;
+        padding: .5rem;
+    }
+
+    .variety-slider-container,
+    .variety-intro {
+        width: 80%;
+    }
+
+    .variety-intro > h2 {
+      font-size: 4rem;
+    }
+}
+
+
+@media screen and (min-width: 1440px) {
+    .variety-slider-container {
+        width: 75%;
+    }
+    
+    .variety-slider-images {
+        height: 500px;
+    }
+
+    .variety-slider-container,
+    .variety-intro {
+        width: 75%;
+    }
 }

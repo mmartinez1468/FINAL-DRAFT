@@ -93,6 +93,111 @@
 
 
 
+// IIFE to isolate the slider code and prevent conflicts with navbar
+(function() {
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get slider elements
+        const sliderTrack = document.querySelector('.variety-slider-track');
+        const navItems = document.querySelectorAll('.variety-nav-item');
+        const prevButton = document.querySelector('.variety-prev');
+        const nextButton = document.querySelector('.variety-next');
+        
+        // Get the number of slides
+        const slideCount = document.querySelectorAll('.variety-slider-image').length;
+        
+        // Initialize current index
+        let currentIndex = 0;
+        let interval;
+        
+        // Function to update the slider position
+        function updateSliderPosition() {
+            if (sliderTrack) {
+                // Move the track based on current index (-100% * currentIndex)
+                sliderTrack.style.transform = `translateX(${-currentIndex * (100 / slideCount)}%)`;
+                
+                // Update active nav item
+                navItems.forEach((item, index) => {
+                    if (index === currentIndex) {
+                        item.classList.add('variety-active');
+                    } else {
+                        item.classList.remove('variety-active');
+                    }
+                });
+            }
+        }
+        
+        // Function to go to a specific slide
+        function goToSlide(index) {
+            // Handle boundaries
+            if (index < 0) {
+                index = slideCount - 1;
+            } else if (index >= slideCount) {
+                index = 0;
+            }
+            
+            // Update current index and position
+            currentIndex = index;
+            updateSliderPosition();
+        }
+        
+        // Add click event listeners to nav items
+        navItems.forEach((item, index) => {
+            item.addEventListener('click', function() {
+                goToSlide(index);
+                resetAutoRotation();
+            });
+        });
+        
+        // Add click event listeners to prev/next buttons
+        if (prevButton) {
+            prevButton.addEventListener('click', function() {
+                goToSlide(currentIndex - 1);
+                resetAutoRotation();
+            });
+        }
+        
+        if (nextButton) {
+            nextButton.addEventListener('click', function() {
+                goToSlide(currentIndex + 1);
+                resetAutoRotation();
+            });
+        }
+        
+        // Function to reset auto-rotation
+        function resetAutoRotation() {
+            clearInterval(interval);
+            startAutoRotation();
+        }
+        
+
+        
+    });
+})(); // Self-executing function to isolate scope
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
 
 
 
@@ -845,3 +950,33 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(sentinel);
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

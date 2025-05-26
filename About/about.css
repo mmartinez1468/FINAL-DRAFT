@@ -5,10 +5,9 @@
     --darkmodeprimary : #ffffff;
     --darkmodesecondary : #000000;
     --coloraccent : #7c7a7a;
-    --coloraccentdarker : #2b2929;
     --coloraccentlight : #373535;
     --coloraccentdark : #000000;
-    --coloraccent-rgb : rgba(255, 255, 255, .1);
+    --colorborder : rgba(255, 255, 255, 0.1);
     --fontfamily : "Oswald", sans-serif;
     --h1 : bold 54px/64px var(--fontfamily);
     --h2 : bold 36px/36px var(--fontfamily);
@@ -286,8 +285,24 @@ th, td {
   transition-delay: 0.5s;
 }
 
+.delay-600 {
+  transition-delay: 0.6s;
+}
+
 .delay-700 {
   transition-delay: 0.7s;
+}
+
+.delay-800 {
+  transition-delay: 0.8s;
+}
+
+.delay-900 {
+  transition-delay: 0.9s;
+}
+
+.delay-1000 {
+  transition-delay: 1s;
 }
 
 /* Easing functions */
@@ -312,26 +327,141 @@ th, td {
 }
 
 
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 5px #4B0082, 0 0 10px #4B0082, 0 0 15px #4B0082;
+    }
+    50% {
+        box-shadow: 0 0 10px #4B0082, 0 0 20px #4B0082, 0 0 30px #4B0082;
+    }
+    100% {
+        box-shadow: 0 0 5px #4B0082, 0 0 10px #4B0082, 0 0 15px #4B0082;
+    }
+}
 
 
 
 
+/* Plasma Background */
+.plasma-wrapper {
+  position: fixed; /* Fixed instead of absolute to stay in place when scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  filter: blur(300px);
+  z-index: -10; /* Lower z-index to ensure it stays behind all content */
+}
 
+.gradient {
+        position: absolute;
+        border-radius: 100%;
+        opacity: 0.6;
+        mix-blend-mode: screen;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
+      }
 
+      
+  .gradient-1 {
+    background: rgb(42, 11, 174) none repeat scroll 0% 0% / auto padding-box border-box;
+    width: 700px;
+    height: 700px;
+    animation-duration: 11s;
+    opacity: 0.6;
+    left: 60%;
+    top: 40%;
+    z-index: -2;
+    animation-name: animation-gradient-1;
+  }
+  .gradient-2 {
+    background: rgb(137, 167, 240) none repeat scroll 0% 0% / auto padding-box border-box;
+    width: 600px;
+    height: 600px;
+    animation-duration: 11s;
+    opacity: 0.6;
+    left: 40%;
+    top: 60%;
+    z-index: -1;
+    animation-name: animation-gradient-2;
+  }
+  .gradient-3 {
+    background: rgb(246, 26, 95) none repeat scroll 0% 0% / auto padding-box border-box;
+    width: 500px;
+    height: 500px;
+    animation-duration: 11s;
+    opacity: 0.6;
+    left: 50%;
+    top: 50%;
+    z-index: -3;
+    animation-name: animation-gradient-3;
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+      @keyframes animation-gradient-1 {
+        0% {
+          transform: translateY(-50%) translateX(-50%) rotate(-20deg) translateX(20%);
+        }
+        25% {
+          transform: translateY(-50%) translateX(-50%) skew(-15deg, -15deg)
+            rotate(80deg) translateX(30%);
+        }
+        50% {
+          transform: translateY(-50%) translateX(-50%) rotate(180deg) translateX(25%);
+        }
+        75% {
+          transform: translateY(-50%) translateX(-50%) skew(15deg, 15deg)
+            rotate(240deg) translateX(15%);
+        }
+        100% {
+          transform: translateY(-50%) translateX(-50%) rotate(340deg) translateX(20%);
+        }
+      }
+      
+      @keyframes animation-gradient-2 {
+        0% {
+          transform: translateY(-50%) translateX(-50%) rotate(40deg) translateX(-20%);
+        }
+        25% {
+          transform: translateY(-50%) translateX(-50%) skew(15deg, 15deg)
+            rotate(110deg) translateX(-5%);
+        }
+        50% {
+          transform: translateY(-50%) translateX(-50%) rotate(210deg) translateX(-35%);
+        }
+        75% {
+          transform: translateY(-50%) translateX(-50%) skew(-15deg, -15deg)
+            rotate(300deg) translateX(-10%);
+        }
+        100% {
+          transform: translateY(-50%) translateX(-50%) rotate(400deg) translateX(-20%);
+        }
+      }
+      
+      @keyframes animation-gradient-3 {
+        0% {
+          transform: translateY(-50%) translateX(-50%) translateX(-15%)
+            translateY(10%);
+        }
+        20% {
+          transform: translateY(-50%) translateX(-50%) translateX(20%)
+            translateY(-30%);
+        }
+        40% {
+          transform: translateY(-50%) translateX(-50%) translateX(-25%)
+            translateY(-15%);
+        }
+        60% {
+          transform: translateY(-50%) translateX(-50%) translateX(30%) translateY(20%);
+        }
+        80% {
+          transform: translateY(-50%) translateX(-50%) translateX(5%) translateY(35%);
+        }
+        100% {
+          transform: translateY(-50%) translateX(-50%) translateX(-15%)
+            translateY(10%);
+        }
+      }
 
 
 
@@ -655,22 +785,6 @@ th, td {
           padding: 1rem 10rem;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .theme-toggle {
     margin-left: auto;
     padding-right: 1rem;
@@ -805,948 +919,463 @@ body.light-mode .dropdown-item-info > p {
 
 
 
+/*********************** LANDING PAGE ***********************/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#pricing {
-    margin-top: 5rem;
+/* Improving the landing page layout */
+#landingPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden; /* Prevents any animation overflow */
+    height: 100vh;
 }
 
-.pricing-intro {
+.landing-quote {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 3rem;
-}
-
-.pricing-intro > h2 {
-    font-size: 1.75rem;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-
-.pricing-intro > p {
-    color: var(--coloraccent);
-}
-
-.switch-plans {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 2rem;
-  width: 100%;
-}
-
-.switch-plans-web {
-
-}
-
-.switch-plans-web .knife-edge-border {
-  background-color: rgb(0, 0, 0);
-  border: 1px solid var(--coloraccent-rgb);
-  padding: .5rem;
-  border-radius: 5px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  box-shadow: none;
-}
-
-.switch-plans-web .knife-edge-border::before {
-  border-radius: 5px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.switch-plans-web .knife-edge-border::after {
-  border-radius: 5px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.switch-plans-media {
-  
-}
-
-.switch-plans-media .knife-edge-border {
-  background-color: rgb(0, 0, 0);
-  padding: .5rem;
-  border-radius: 5px;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  border: 1px solid var(--coloraccent-rgb);
-}
-
-.switch-plans-media .knife-edge-border::before {
-  border-radius: 5px;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-}
-
-.switch-plans-media .knife-edge-border::after {
-  border-radius: 5px;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-}
-
-.switch-plans-web .knife-edge-border,
-.switch-plans-media .knife-edge-border {
-  text-align: center;
-  display: inline-block;
-  font-weight: 400;
-  text-transform: uppercase;
-  font-size: .75rem;
-  width: 125px;
-  background-color: #141414;
-}
-
-/* Add this to your CSS */
-.switch-plans-web.active .knife-edge-border {
-  background-color: var(--colorprimary);
-  color: var(--colorsecondary);
-}
-
-.switch-plans-media.active .knife-edge-border {
-  background-color: var(--colorprimary);
-  color: var(--colorsecondary);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.pricing-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 20px;
-}
-        .pricing-card {
-            width: 90%;
-            background-color: var(--colorsecondary);
-            color: var(--colorprimary);
-            border-radius: 20px;
-            border: 1px solid var(--coloraccent-rgb);
-            padding: 2rem 1.25rem;
-        }
-        .pricing-card-name {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-transform: uppercase;
-        }
-        .pricing-popular {
-            margin-right: auto;
-            background-color: #00aaff;
-            border-radius: 10px;
-            padding: 0 .5rem;
-            font-size: .75rem;
-            margin-left: 1rem;
-            margin-top: .2rem;
-            box-shadow: 0 0 10px 3px rgba(0, 170, 255, 0.7), 0 0 15px 5px rgba(0, 170, 255, 0.4);
-            position: relative;
-            z-index: 1;
-        }
-        .pricing-card-cost p {
-            margin: 0;
-        }
-        .toggle-container {
-            display: flex;
-            align-items: center;
-        }
-        .toggle-text {
-            font-size: 14px;
-            margin-right: 8px;
-        }
-        .toggle-switch {
-            position: relative;
-            width: 40px;
-            height: 20px;
-            background-color: var(--coloraccentlight);
-            border: 1px solid var(--coloraccent-rgb);
-            border-radius: 10px;
-            cursor: pointer;
-            display: inline-block;
-        }
-        .toggle-switch .toggle-circle {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            width: 18px;
-            height: 18px;
-            background-color: var(--coloraccent);
-            border-radius: 50%;
-            transition: transform var(--transition);
-        }
-        .toggle-switch.active {
-            background-color: #09477d;
-            border: 1px solid #0c65b3;
-        }
-        .toggle-switch.active .toggle-circle {
-            transform: translateX(20px);
-            background-color: var(--colorprimary);
-            transition: transform var(--transition);
-        }
-
-        .pricing-explained {
-            padding-left: 0;
-        }
-
-        .pricing-explained li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0;
-        }
-        .pricing-explained li > p {
-            font-size: 1rem;
-        }
-        .pricing-explained li > svg {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-            fill: green;
-            background-color: white;
-            border-radius: 50%;
-        }
-        #changeSVG {
-            fill: red;
-            background-color: white;
-            border-radius: 50%;
-        }
-        .pricing-button-wrapper {
-            display: flex;
-            justify-content: center;
-        }
-        .pricing-button {
-            background-color: var(--coloraccentlight);
-            color: var(--colorprimary);
-            padding: .5rem 0;
-            border-radius: 10px;
-            width: 100%;
-            text-align: center;
-        }
-        .pricing-button:hover {
-            background-color: var(--coloraccentdarker);
-            transition: var(--transition);
-        }
-        #pricingButton {
-            background-color: #00aaff;
-        }
-        #pricingButton:hover {
-            background-color: #0088cc;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.pricing-depth-mobile {
-    padding: 1rem;
-    border-top: 1px solid var(--coloraccent-rgb);
-    border-bottom: 1px solid var(--coloraccent-rgb);
-    position: sticky;
-    top: 70px;
-    z-index: 10;
-    background-color: var(--colorsecondary);
-    width: 100%;
-    margin-bottom: 2rem;
-}
-
-.pricing-depth-intro {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--coloraccent-rgb);
-}
-.toggle-container {
-    margin-left: auto;
-}
-
-.pricing-depth-options {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 1rem;
-}
-
-.pricing-depth-card {
-    width: 33.33%;
-    display: flex;
-    flex-direction: column;
-
-    height: 100%;
-    box-sizing: border-box;
-}
-
-/* Equal padding on all cards */
-.pricing-depth-card:nth-child(1) {
-    padding: 0 0.5rem 0 0;
-}
-.pricing-depth-card:nth-child(2) {
-    padding: 0 0.5rem;
-    border-left: 1px solid var(--coloraccent-rgb);
-    border-right: 1px solid var(--coloraccent-rgb);
-}
-.pricing-depth-card:nth-child(3) {
-    padding: 0 0 0 0.5rem;
-}
-
-/* Style the button for the Premium card */
-.pricing-depth-card:nth-child(2) .pricing-button {
-    background-color: #00aaff;
-}
-
-.pricing-depth-card:nth-child(2) .pricing-button:hover {
-    background-color: #0088cc; 
-}
-
-/* Consistent text format */
-.pricing-card-cost p {
-    font-size: 1rem;
-    margin: 0.5rem 0;
-}
-
-/* Fix the buttons to be consistent */
-.pricing-button-wrapper {
-    width: 100%;
-    margin-top: auto;
-}
-
-#pricingButtonMobile {
-    width: 100%;
-    font-size: 0.75rem;
-    display: block;
-}
-
-#pricingButtonMobile button {
-    text-transform: uppercase;
-    width: 100%;
-}
-.pricing-depth-card .pricing-card-cost p:nth-child(2) {
-    display: none;
-}
-#pricingDepthCost {
-    padding: 0;
+    max-width: 800px;
+    padding: 20px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-.pricing-services {
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
-    padding: 1rem;
-}
-.pricing-services-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.pricing-services-intro {
-    display: flex;
-    align-items: center;
-    gap: .75rem;
-    border-bottom: 1px solid var(--coloraccent-rgb);
-    padding-bottom: 1rem;
-}
-
-.pricing-services-intro > h3 {
-    font-weight: 400;
-}
-
-.pricing-services-intro > svg {
-    height: 30px;
-}
-
-
-
-
-
-.pricing-services-wrapper {
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid var(--coloraccent-rgb);
-    padding-bottom: 1rem;
-}
-
-.pricing-services-name {
-    padding-bottom: .75rem;
-}
-
-.pricing-services-name > p {
-    font-size: 1rem;
-    color: var(--coloraccent);
-}
-
-
-.pricing-services-explained {
-    display: flex;
-}
-.services-explained-card {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    width: 33.33%;
-}
-.services-explained-card:nth-child(2) {
-    padding: 0 0.5rem;
-}
-.services-explained-card:nth-child(3) {
-    padding-left: .5rem;
-}
-.services-explained-card > svg {
-    height: 15px;
-}
-#checkmarkNo {
-    fill: var(--coloraccent);
-    height: 10px;
-}
-.services-explained-card > p {
-    font-size: 1rem;
-}
-
-
-
-
-
-
-
-
-@media screen and (min-width: 768px) {
-  .pricing-intro {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .pricing-intro > h2 {
-    font-size: 3rem;
-  }
-  .pricing-intro > p {
+/* Animation styling */
+.typewriter {
     font-size: 1.5rem;
-    padding-top: 1rem;
-    width: 500px;
-  }
+    letter-spacing: 1px;
+    line-height: 1.75rem;
+    width: 90%;
+    color: #ffffff;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-family: "Lobster", sans-serif;
 }
 
+@media screen and (min-width: 384px) {
+    .typewriter {
+        font-size: 1.75rem;
+    }
+}
+@media screen and (min-width: 427px) {
+    .typewriter {
+        font-size: 2.5rem;
+        line-height: 3rem;
+    }
+    .landing-powered > span {
+        font-size: .6rem !important;
+    }
+    .landing-powered-images > img {
+        height: 40px !important;
+    }
+}
+@media screen and (min-width: 557px) {
+    .typewriter {
+        font-size: 3rem;
+        line-height: 3rem;
+        width: 80%;
+    }
+}
+@media screen and (min-width: 719px) {
+    .typewriter {
+        font-size: 4rem;
+        line-height: 4rem;
+        width: 100%;
+    }
+}
 
+/* Text container to preserve word wrapping */
+.typewriter-container {
+    display: inline;
+}
 
-@media screen and (min-width:993px) {
-  .pricing-wrapper {
-    flex-direction: row;
-    padding: 0 1rem;
-    padding-top: 10px;
-    position: sticky;
-    top: 70px;
-    z-index: 10;
-    background-color: var(--colorsecondary);
+.landing-powered > span {
+    padding-top: 1rem;
+    font-size: .5rem;
+    text-transform: uppercase;
+    background: linear-gradient(
+      45deg,
+      #ff0000,
+      #ff7300,
+      #fffb00,
+      #48ff00,
+      #00ffd5,
+      #002bff,
+      #7a00ff,
+      #ff00c8,
+      #ff0000
+    );
+    background-size: 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow-text 60s linear infinite;
+}
+@keyframes rainbow-text {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: 400% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
   }
-  .pricing-depth-mobile {
-    display: none;
-  }
+.landing-powered-images {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+.landing-powered-images > img {
+    height: 25px;
+}
 
-  .pricing-services {
-    padding: 6rem 1rem;
-  }
+/* Class for individual letter spans */
+.letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(10px) rotateY(90deg);
+    animation-name: fadeInRotate;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    font-family: "Neuton", serif;
+    font-weight: 500;
+    font-style: italic;
+}
 
-  .pricing-explained {
-    /* Initial state */
-    overflow: hidden;
-    max-height: 200px; /* Adjust based on your content's actual height */
-    opacity: 1;
-    transform: translateY(0);
-    transition: max-height 0.3s ease-out, 
-                opacity 0.25s ease-out,
-                transform 0.3s ease-out;
+/* Add bigger space between words */
+.space {
+    margin-right: 0.25em;
+}
+
+/* Animation keyframes */
+@keyframes fadeInRotate {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) rotateY(90deg);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateY(5px) rotateY(45deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateY(0deg);
+    }
+}
+.scrollPosition {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ /*  Scroll Down Icon */
+ .scroll-down {
+    height: 50px;
+    width: 30px;
+    border: 2px solid #ffffff;
+    position: relative;
+    left: 10%;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: #000000;
+    margin-top: 3em;
+ }
+ 
+ @media (min-width: 1701px) {
+    .scroll-down {
+       height: 70px;
+       width: 40px;
+       border: 2px solid #ffffff;
+       position: relative;
+       left: 10%;
+       border-radius: 50px;
+       cursor: pointer;
+       background-color: #000000;
+       margin-top: 3em;
+    }
+ }
+ .scroll-down::before,
+ .scroll-down::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    border: 2px solid #d1e3f1;
+    height: 10px;
+    width: 10px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    border-top: transparent;
+    border-left: transparent;
+    animation: scroll-down 1s ease-in-out infinite;
+ }
+ .scroll-down::after {
+    top: 20%;
+    animation-delay: .3s;
+ }
+ :target::before {
+    content: "";
+    display: block;
+    height: 132px; /* Set this to match the height of your sticky nav */
+    margin-top: -132px; /* Negative value of the height */
+    pointer-events: none;
+ }
+ @keyframes scroll-down {
+    0% {
+       opacity: 0;
+    }
+    30% {
+       opacity: 1;
+    }
+    60% {
+       opacity: 1;
+    }
+    100% {
+       opacity: 0;
+       top: 90%;
+    }
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* Team section */
+#team-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0;
+    padding-top: 0;
   }
   
-  .pricing-explained.hidden {
-    /* Animated closed state */
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(-10px);
-    pointer-events: none; /* Prevents interaction while hidden */
+  
+  .team-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10rem;
   }
-
-}
-
-@media screen and (min-width: 1024px) {
-  #pricing {
+  
+  .team-intro > span {
+    color: #1178de;
+  }
+  
+  .team-intro > h2 {
+    margin-bottom: 1rem;
+    color: #ffffff;
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+  
+  .team-intro > p {
+    width: 80%;
+    color: #777777;
+  }
+  
+  .team-about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 8rem;
+    width: 90%;
+  }
+  
+  .team-about-container {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 90%; 
-    margin: 0 auto; 
-    max-width: 1400px;
-    margin-top: 6rem;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border-radius: 10px;
+    padding: 2rem 1rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height: auto;
+    border: 3px solid white;
   }
-
-  .switch-plans-web .knife-edge-border,
-  .switch-plans-media .knife-edge-border {
+  
+  .team-about-intro {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .team-about-intro > img {
     width: 200px;
+    background-color: #ffffff;
+    margin-top: -120px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid #777777;
+  }
+  
+  .team-about-intro > span {
+    border-bottom: 3px solid #0a3474;
+    color: #ffffff;
+    padding-top: 1rem;
     font-size: 1rem;
   }
-}
+  
+  .team-about-intro > h3 {
+    font-size: 2rem;
+    padding: .75rem 0;
+  }
+  
+  .team-about-intro > p {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #777777;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  
+  .team-about-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .team-about-info > button {
+    margin-top: 1rem;
+  }
+  
+  .team-links {
+    display: flex;
+    gap: 20px;
+    padding-left: 0;
+    padding-bottom: 1rem;
+  }
+  
+  /* Style for all icons including the SVG */
+  .team-links li a i, 
+  .team-links li a svg {
+    color: rgb(255, 255, 255);
+    transition: color 0.3s;
+  }
+  
+  .team-links li a svg {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .team-links li a:hover i,
+  .team-links li a:hover svg {
+    color: #1178de;
+  }
+  
+  @media screen and (min-width: 1000px) {
+    .team-intro > h2 {
+      font-size: 3rem;
+      line-height: 3rem;
+    }
+  }
+  
+  @media screen and (min-width: 875px) {
+    .team-about {
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    .team-about-container {
+      width: 475px;
+    }
+  }
 
-@media screen and (min-width: 1248px) {
-  #pricing {
-    width: 70%;
+  @media screen and (min-width: 1335px) {
+    .team-intro > h2 {
+        font-size: 4rem;
+        line-height: 4rem;
+    }
+    .team-intro > p {
+        font-size: 1.25rem !important;
+    }
+  }
+
+@media screen and (min-width: 451px) {
+    .team-about-container {
+        padding: 2rem 2rem;
+        width: 90%;
+    }
+    .team-about-intro > span {
+        font-size: 1rem;
+    }
+}
+@media screen and (min-width: 565px) {
+    .team-about-container {
+        width: 450px;
+    }
+    .team-links {
+        margin-top: 3rem;
+    }
+
+    .team-about-intro > p {
+    font-size: 1.25rem;
+    
   }
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Light mode styles for pricing section */
-
-/* Basic pricing section background */
-body.light-mode #pricing {
-    color: var(--colorsecondary);
-    background-color: var(--colorprimary);
-}
-
-body.light-mode .pricing-wrapper {
-  background-color: var(--colorprimary);
-}
-
-/* Pricing intro section */
-body.light-mode .pricing-intro > h2,
-body.light-mode .pricing-intro > p {
-    color: var(--colorsecondary);
-}
-
-/* Switch plans buttons */
-body.light-mode .switch-plans-web .knife-edge-border,
-body.light-mode .switch-plans-media .knife-edge-border {
-    background-color: var(--colorsecondary);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: var(--colorprimary);
-}
-
-body.light-mode .switch-plans-web.active .knife-edge-border,
-body.light-mode .switch-plans-media.active .knife-edge-border {
-    background-color: var(--colorprimary);
-    color: var(--colorsecondary);
-}
-
-/* Pricing cards - general */
-body.light-mode .pricing-card {
-    background-color: var(--colorprimary);
-    color: var(--colorsecondary);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-/* Pricing card name and cost */
-body.light-mode .pricing-card-name h3,
-body.light-mode .pricing-card-cost p {
-    color: var(--colorsecondary);
-}
-
-/* Toggle text and switch */
-body.light-mode .toggle-text {
-    color: var(--colorsecondary);
-}
-
-body.light-mode .toggle-switch {
-    background-color: #e0e0e0;
-    border: 1px solid #969393;
-}
-
-body.light-mode .toggle-switch .toggle-circle {
-    background-color: #000000;
-}
-
-body.light-mode .toggle-switch.active {
-    background-color: #d4eaff;
-    border: 1px solid #a8d4ff;
-}
-
-body.light-mode .toggle-switch.active .toggle-circle {
-    background-color: #0088cc;
-}
-
-/* Pricing explained lists */
-body.light-mode .pricing-explained li p {
-    color: var(--colorsecondary);
-}
-
-body.light-mode .pricing-explained li > svg {
-    background-color: #e0e0e0;
-    fill: #00aa00;
-}
-
-body.light-mode #changeSVG {
-    background-color: #e0e0e0;
-    fill: #ee0000;
-}
-
-/* Pricing buttons */
-body.light-mode .pricing-button {
-    background-color: var(--colorsecondary);
-    color: var(--colorprimary);
-}
-
-body.light-mode .pricing-button:hover {
-    background-color: var(--coloraccentdarker);
-}
-
-body.light-mode #pricingButton {
-    background-color: #00aaff;
-    color: white;
-}
-
-body.light-mode #pricingButton:hover {
-    background-color: #0088cc;
-}
-
-/* Pricing depth mobile section */
-body.light-mode .pricing-depth-mobile {
-    background-color: var(--colorprimary);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-body.light-mode .pricing-depth-intro {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-body.light-mode .pricing-depth-intro h3 {
-    color: var(--colorsecondary);
-}
-
-body.light-mode .pricing-depth-card {
-    color: var(--colorsecondary);
-}
-
-body.light-mode .pricing-depth-card:nth-child(2) {
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Services section */
-body.light-mode .pricing-services {
-    color: var(--colorsecondary);
-}
-
-body.light-mode .pricing-services-intro {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-body.light-mode .pricing-services-intro > h3 {
-    color: var(--colorsecondary);
-}
-
-body.light-mode .pricing-services-intro > svg {
-    fill: var(--colorsecondary);
-}
-
-body.light-mode .pricing-services-wrapper {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-body.light-mode .pricing-services-name > p {
-    color: #666;
-}
-
-body.light-mode .services-explained-card > p {
-    color: var(--colorsecondary);
-}
-
-body.light-mode .services-explained-card > svg {
-    fill: #00aa00;
-}
-
-body.light-mode #checkmarkNo {
-    fill: #999;
-}
-
-/* Knife-edge border for fancy card */
-body.light-mode .knife-edge-border {
-    background-color: var(--colorprimary);
-    color: var(--colorsecondary);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-body.light-mode .knife-edge-border::before,
-body.light-mode .knife-edge-border::after {
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
-}
-
-/* Gradient card in light mode */
-body.light-mode .knife-edge-border.gradient-card {
-    background: white;
-}
-
-body.light-mode .black-blue-gradient {
-    background: var(--colorprimary);
-}
-
-/* Popular tag */
-body.light-mode .pricing-popular {
-    background-color: #00aaff;
-    color: white;
-    box-shadow: 0 0 10px 3px rgba(0, 170, 255, 0.4), 0 0 15px 5px rgba(0, 170, 255, 0.2);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@property --border-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-/* Knife-edge border class */
-.knife-edge-border {
-  position: relative;
-  border-radius: 20px;
-  background-color: var(--colorsecondary); /* Card background color - customize as needed */
-  color: white;
-  box-sizing: border-box;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Optional shadow for the card */
-}
-
-/* Common properties for both lights */
-.knife-edge-border::before,
-.knife-edge-border::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 20px;
-  padding: 2px; /* Border width */
-  pointer-events: none;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
-}
-
-/* First light */
-.knife-edge-border::before {
-  background: conic-gradient(
-    from var(--border-angle),
-    transparent 0%,
-    transparent 43%,
-    rgba(255, 255, 255, 0.3) 46%,
-    rgba(255, 255, 255, 0.85) 48%, 
-    white 50%,
-    rgba(255, 255, 255, 0.85) 52%,
-    rgba(255, 255, 255, 0.3) 54%,
-    transparent 57%,
-    transparent 100%
-  );
-  animation: knife-rotate 5s linear infinite;
-}
-
-/* Second light (opposite side) */
-.knife-edge-border::after {
-  background: conic-gradient(
-    from calc(var(--border-angle) + 180deg),
-    transparent 0%,
-    transparent 43%,
-    rgba(255, 255, 255, 0.3) 46%,
-    rgba(255, 255, 255, 0.85) 48%, 
-    white 50%,
-    rgba(255, 255, 255, 0.85) 52%,
-    rgba(255, 255, 255, 0.3) 54%,
-    transparent 57%,
-    transparent 100%
-  );
-  animation: knife-rotate 5s linear infinite;
-}
-
-/* Animation for the rotating lights */
-@keyframes knife-rotate {
-  from { --border-angle: 0deg; }
-  to { --border-angle: 360deg; }
-}
-
-
-
-
-
-
-
-
-
-
-
-.knife-edge-border.gradient-card {
-  background: linear-gradient(135deg, #000000 0%, #000000 50%, #003366 100%);
-  position: relative;
-  z-index: 0;
-}
-
-/* Make sure the border effect stays on top of gradient */
-.knife-edge-border.gradient-card::before,
-.knife-edge-border.gradient-card::after {
-  z-index: 1;
-}
-
-.black-blue-gradient {
-  background: linear-gradient(135deg, #000000, #02478d);
-}

@@ -193,6 +193,89 @@
 
 
 
+// Default text to display
+const defaultText = "Welcome to our site. We create amazing experiences for our customers.";
+        
+// Function to animate all text in an element
+function animateElement(element) {
+    // Store original text
+    const originalText = element.textContent || defaultText;
+    
+    // Clear the element
+    element.innerHTML = '';
+    
+    // Split the text into words
+    const words = originalText.split(' ');
+    
+    let delay = 0;
+    
+    // Process each word
+    words.forEach((word, wordIndex) => {
+        // Create a word container to keep letters together
+        const wordContainer = document.createElement('span');
+        wordContainer.className = 'word';
+        wordContainer.style.display = 'inline-block';
+        wordContainer.style.marginRight = '0.25em'; // Space between words
+        
+        // Add each letter of the word
+        for (let i = 0; i < word.length; i++) {
+            const span = document.createElement('span');
+            span.textContent = word[i];
+            span.className = 'letter';
+            
+            // Set the animation delay
+            span.style.animationDelay = `${delay}s`;
+            delay += 0.09;
+            
+            wordContainer.appendChild(span);
+        }
+        
+        // Add the word to the element
+        element.appendChild(wordContainer);
+    });
+}
+
+// Function to reset the animation
+function resetAnimation() {
+    const typewriter = document.getElementById('typewriter');
+    
+    // Store the original text
+    const originalText = typewriter.innerText || defaultText;
+    
+    // Reset the element
+    typewriter.innerHTML = '';
+    
+    // Re-animate after a short delay
+    setTimeout(() => {
+        typewriter.textContent = originalText;
+        animateElement(typewriter);
+    }, 100);
+}
+
+// Run the animation on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const typewriter = document.getElementById('typewriter');
+    animateElement(typewriter);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
 
@@ -980,3 +1063,205 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+// Simple navbar background after scrolling a little bit
+function initNavbarBlur() {
+    const navbar = document.querySelector('.navbar');
+    
+    function checkScrollPosition() {
+        if (!navbar) return;
+        
+        // Check if we've scrolled down a little bit (50px threshold)
+        const scrollThreshold = 50;
+        const hasScrolled = window.scrollY > scrollThreshold;
+        
+        if (hasScrolled) {
+            navbar.classList.add('scrolled-past');
+        } else {
+            navbar.classList.remove('scrolled-past');
+        }
+    }
+    
+    // Check on scroll
+    window.addEventListener('scroll', checkScrollPosition);
+    
+    // Initial check
+    checkScrollPosition();
+}
+
+// Initialize when DOM loads
+document.addEventListener('DOMContentLoaded', () => {
+    initNavbarBlur();
+    // ... other functions
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Image Comparison Slider - Vanilla JavaScript
+        function initImageComparisonSliders() {
+            const compSliders = document.querySelectorAll('.comparison-slider');
+            
+            if (compSliders.length === 0) return;
+            
+            // Initialize each slider
+            compSliders.forEach(function(slider) {
+                const sliderWidth = slider.offsetWidth + 'px';
+                const resizeImg = slider.querySelector('.resize img');
+                if (resizeImg) {
+                    resizeImg.style.width = sliderWidth;
+                }
+                
+                const divider = slider.querySelector('.divider');
+                const resize = slider.querySelector('.resize');
+                
+                if (divider && resize) {
+                    setupDragging(divider, resize, slider);
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                compSliders.forEach(function(slider) {
+                    const sliderWidth = slider.offsetWidth + 'px';
+                    const resizeImg = slider.querySelector('.resize img');
+                    if (resizeImg) {
+                        resizeImg.style.width = sliderWidth;
+                    }
+                });
+            });
+        }
+
+        function setupDragging(dragElement, resizeElement, container) {
+            let isDragging = false;
+            let touched = false;
+            
+            // Detect touch devices
+            window.addEventListener('touchstart', function() {
+                touched = true;
+            });
+            
+            window.addEventListener('touchend', function() {
+                touched = false;
+            });
+            
+            function startDrag(e) {
+                isDragging = true;
+                
+                dragElement.classList.add('draggable');
+                resizeElement.classList.add('resizable');
+                
+                const startX = e.pageX || (e.touches && e.touches[0].pageX);
+                const dragWidth = dragElement.offsetWidth;
+                const posX = dragElement.getBoundingClientRect().left + dragWidth - startX;
+                const containerRect = container.getBoundingClientRect();
+                const containerOffset = containerRect.left;
+                const containerWidth = containerRect.width;
+                const minLeft = containerOffset + 10;
+                const maxLeft = containerOffset + containerWidth - dragWidth - 10;
+                
+                function handleMove(e) {
+                    if (!isDragging) return;
+                    
+                    if (!touched) {
+                        e.preventDefault();
+                    }
+                    
+                    const moveX = e.pageX || (e.touches && e.touches[0].pageX);
+                    let leftValue = moveX + posX - dragWidth;
+                    
+                    // Constrain movement within container bounds
+                    if (leftValue < minLeft) {
+                        leftValue = minLeft;
+                    } else if (leftValue > maxLeft) {
+                        leftValue = maxLeft;
+                    }
+                    
+                    const widthValue = ((leftValue + dragWidth / 2 - containerOffset) * 100 / containerWidth) + '%';
+                    
+                    dragElement.style.left = widthValue;
+                    resizeElement.style.width = widthValue;
+                }
+                
+                function stopDrag() {
+                    if (!isDragging) return;
+                    
+                    isDragging = false;
+                    dragElement.classList.remove('draggable');
+                    resizeElement.classList.remove('resizable');
+                    
+                    document.removeEventListener('mousemove', handleMove);
+                    document.removeEventListener('mouseup', stopDrag);
+                    document.removeEventListener('touchmove', handleMove);
+                    document.removeEventListener('touchend', stopDrag);
+                    document.removeEventListener('touchcancel', stopDrag);
+                }
+                
+                document.addEventListener('mousemove', handleMove);
+                document.addEventListener('mouseup', stopDrag);
+                document.addEventListener('touchmove', handleMove);
+                document.addEventListener('touchend', stopDrag);
+                document.addEventListener('touchcancel', stopDrag);
+            }
+            
+            // Add event listeners for drag start
+            dragElement.addEventListener('mousedown', startDrag);
+            dragElement.addEventListener('touchstart', startDrag);
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initImageComparisonSliders);
+        } else {
+            initImageComparisonSliders();
+        }

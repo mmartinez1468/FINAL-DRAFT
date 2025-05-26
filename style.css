@@ -327,6 +327,17 @@ th, td {
 }
 
 
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 5px #4B0082, 0 0 10px #4B0082, 0 0 15px #4B0082;
+    }
+    50% {
+        box-shadow: 0 0 10px #4B0082, 0 0 20px #4B0082, 0 0 30px #4B0082;
+    }
+    100% {
+        box-shadow: 0 0 5px #4B0082, 0 0 10px #4B0082, 0 0 15px #4B0082;
+    }
+}
 
 
 
@@ -460,18 +471,33 @@ th, td {
 
  /* Base Mobile-First Navbar Styles */
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background-color: var(--colorsecondary);
-            position: fixed; /* Change from relative to fixed */
-            top: 0; /* Position at the top of the viewport */
-            left: 0; /* Ensure it spans the full width */
-            right: 0;
-            width: 100%; /* Make sure it's full width */
-            z-index: 100;
-        }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    transition: background-color var(--transition), backdrop-filter var(--transition);
+    /* No background by default */
+}
+
+/* Blur background after scrolling a little bit */
+.navbar.scrolled-past {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Light mode version */
+body.light-mode .navbar.scrolled-past {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
         
         .logo {
             display: flex;
@@ -539,7 +565,7 @@ th, td {
         .dropdown {
             max-height: 0;
             overflow: hidden;
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: var(--colorsecondary);
             width: 100%;
             transition: max-height 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
             list-style: none;
@@ -682,7 +708,6 @@ th, td {
             top: 100%;
             left: 50%; /* Position from center of parent */
             transform: translateX(-50%); /* Center the dropdown */
-            background-color: rgba(21, 21, 21, 0.664);
             width: 250px;
             margin-top: 1rem;
             box-shadow: var(--shadowdark);
@@ -865,13 +890,21 @@ body.light-mode .dropdown-item-info > p {
 }
 
 @media (min-width: 993px) {
+    body.light-mode .navbar {
+      background-color: unset;
+    }
+  
     body.light-mode .dropdown {
-      background-color: rgba(255, 255, 255, 0.451);
+      background-color: var(--colorprimary);
     }
 
     body.light-mode .dropdown-link > svg {
       fill: var(--colorprimary);
       background-color: var(--colorsecondary);
+    }
+
+    body.light-mode .nav-menu {
+      background-color: unset;
     }
 
     body.light-mode .dropdown-link:hover > svg {
@@ -964,11 +997,12 @@ body.light-mode .dropdown-item-info > p {
 
 
 
-
+/**************************************** 
+            LANDING SECTION
+****************************************/
 #landing {
-    height: 80vh;
-    margin-top: 5rem;
-    background-color: black;
+    height: 100vh;
+    margin-top: 4.9rem;
 }
 
 .landing-intro {
@@ -1203,7 +1237,7 @@ body.light-mode .dropdown-item-info > p {
 .landing-image img {
     width: 100%;
     border-radius: 10px;
-    border: 3px solid var(--coloraccent);
+    border: 3px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
     position: relative;
     background-color: black;
@@ -1355,6 +1389,10 @@ svg {
 }
 
 @media screen and (min-width: 768px) {
+  #landing {
+    height: 80vh;
+  }
+  
   .landing-intro {
     padding-top: 4rem;
   }
@@ -1581,62 +1619,41 @@ svg {
 
 
 
-/* Add this to your CSS file */
-/* Add this to your CSS file */
-
-/* Ensure proper section layout */
+/* Fixes Landing */
 #landing {
   position: relative;
   /* Keep original height - don't modify */
   margin-bottom: 0;
   z-index: 1;
 }
-
 #variety {
   position: relative;
   z-index: 1;
   /* Explicitly set top position to start after landing */
-  margin-top: 5vh; /* Base value for mobile - reduced to prevent too much space */
 }
-
-/* Preserve landing image and shadow */
 .landing-image {
   position: relative;
   /* Keep all existing styles as is */
 }
-
-.landing-image::after {
-  /* Keep shadow as is - don't modify */
-}
-
-/* Stats section positioning */
 .landing-stats {
   position: relative;
   /* Keep original height - don't modify */
   z-index: 1;
 }
-
-/* Responsive adjustments */
 @media screen and (min-width: 768px) {
   #variety {
     /* Adjust this value if the landing section height changes at this breakpoint */
-    margin-top: 46vh; /* Larger value for desktop */
+    margin-top: 25vh; /* Larger value for desktop */
   }
 }
-
 @media screen and (min-width: 1024px) {
   #variety {
-    margin-top: 70vh; /* Full viewport height for larger screens */
-  }
-}
-@media screen and (min-width: 419px) and (max-width: 767px) {
-  #variety {
-    margin-top: 15vh; /* Adjusted for small tablets/large phones */
+    margin-top: 49vh; /* Full viewport height for larger screens */
   }
 }
 @media screen and (min-width: 1440px) {
   #variety {
-    margin-top: 85vh; /* Adjusted for small tablets/large phones */
+    margin-top: 65vh; /* Adjusted for small tablets/large phones */
   }
 }
 
@@ -1668,11 +1685,13 @@ svg {
 
 
 
-
-/* Variety Section Styles - Isolated to prevent navbar conflicts */
+/**************************************** 
+            VARIETY SECTION
+****************************************/
 #variety {
-    padding: 3rem 0rem;
+    padding: 4rem 0rem;
     position: relative;
+    background-color: #000000;
 }
 
 .variety-intro {
@@ -1699,14 +1718,16 @@ svg {
     margin-bottom: 1.5rem;
 }
 
-/* Images Container - With overflow hidden for sliding effect */
 .variety-slider-images {
     position: relative;
     overflow: hidden;
     border-radius: 1px;
-    border: 1px solid rgba(255, 255, 255, 0.1);;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     height: 175px; /* Default height for mobile */
+    
+    /* Add the pulsing glow effect */
+    animation: pulseGlow 2s ease-in-out infinite;
 }
 
 /* Slider Track - This is what moves */
@@ -1827,6 +1848,10 @@ body.light-mode .variety-nav-item.variety-active {
 
 /* Responsive Adjustments - Using min-width media queries */
 @media screen and (min-width: 768px) {
+    #variety {
+      padding: 5rem 0rem;
+    }  
+
     .variety-slider-container {
         width: 85%;
     }
@@ -1857,10 +1882,15 @@ body.light-mode .variety-nav-item.variety-active {
 
     .variety-intro > h2 {
       font-size: 3rem;
+      padding: 1rem 0;
     }
 }
 
 @media screen and (min-width: 1024px) {
+    #variety {
+      padding: 6rem 0rem;
+    }  
+    
     .variety-slider-container {
         width: 80%;
     }
@@ -1913,3 +1943,779 @@ body.light-mode .variety-nav-item.variety-active {
         width: 75%;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #services {
+            padding: 4rem 0rem;
+        }
+
+        .services-intro {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          text-align: center;
+          margin-bottom: 2rem;
+          gap: 1rem;
+          padding: 0 1rem;
+        }
+
+        .services-card-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .services-card {
+            background-color: #111;
+            color: var(--colorprimary);
+            width: 90%;
+            border-radius: 10px;
+            padding: 2rem 1rem;
+            border: .5px solid var(--colorborder);
+            border-color: rgba(255, 255, 255, .1);
+        }
+
+        .services-card-intro {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .services-card-intro > h2 {
+            font-size: 1.75rem;
+        }
+
+        .services-card-intro > p {
+            font-size: 1rem;
+            line-height: 1.5rem;
+        }
+
+        .services-card-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .services-card-link > a {
+            color: var(--coloraccent);
+            text-decoration: underline;
+            font-size: 1rem;
+            text-underline-offset: .25rem;
+        }
+
+        .services-card-link > svg {
+            height: 30px;
+            color: var(--coloraccent);
+            padding-top: .25rem;
+        }
+
+        .services-card-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 1rem;
+        }
+
+        .services-card-image > img {
+            height: 250px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        /* Responsive layout for tablets and desktop */
+        @media (min-width: 768px) {
+          .services-intro > h2 {
+            font-size: 3rem;
+            line-height: 3rem;
+          }  
+          
+          .services-card-wrapper {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto auto;
+                gap: 1.5rem;
+                max-width: 1080px; /* 90% of 1200px */
+                margin: 0 auto;
+                padding: 0 1rem;
+            }
+
+            /* First card - takes full width */
+            .services-card:nth-child(1) {
+                grid-column: 1 / -1;
+                width: 100%;
+            }
+
+            .services-card:nth-child(1) > .services-card-intro {
+                width: 70%;
+            }
+
+            /* Second and third cards - side by side, aligned with first card */
+            .services-card:nth-child(2) {
+                grid-column: 1;
+                width: 100%;
+            }
+
+            .services-card:nth-child(3) {
+                grid-column: 2;
+                width: 100%;
+            }
+
+            /* Fourth card - takes full width */
+            .services-card:nth-child(4) {
+                grid-column: 1 / -1;
+                width: 100%;
+            }
+
+            .services-card:nth-child(4) > .services-card-intro {
+                width: 70%;
+            }
+
+            /* Ensure cards don't overflow */
+            .services-card {
+                box-sizing: border-box;
+                min-width: 0;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+          #services {
+            padding: 5rem 0rem;
+          }
+        }
+
+        @media screen and (min-width: 1024px) {
+          #services {
+            padding: 6rem 0rem;
+          }
+          .services-intro > h2 {
+            font-size: 4rem;
+            line-height: 4rem;
+          }
+        }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #callToAction {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          padding: 4rem 1rem;
+        }
+
+        .cta-intro {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          gap: 1rem;
+          padding-bottom: 1rem;
+        }
+
+        .cta-intro > span {
+          color: var(--coloraccent);
+        }
+
+        .cta-button {
+          background-color: var(--colorprimary);
+          color: var(--colorsecondary);
+          border: 3px solid var(--colorprimary);
+          padding: .5rem 2rem;
+          border-radius: 10px;
+        }
+        .cta-button:hover {
+          background-color: transparent;
+          transition: var(--transition);
+          border: 3px solid var(--colorprimary);
+          color: var(--colorprimary);
+        }
+
+
+
+
+
+
+
+        @media screen and (min-width: 768px) {
+          .cta-intro > h2 {
+            font-size: 3rem;
+            line-height: 3rem;
+          }
+          .cta-intro > span {
+            width: 80%;
+          }
+          .demo-container {
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+
+        @media screen and (min-width: 1024px) {
+          #callToAction {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+          }
+
+          .cta-intro {
+            width: 50%;
+            text-align: start;
+            align-items: start;
+            padding-bottom: 0;
+          }
+          
+          .cta-intro > h2 {
+            font-size: 4rem;
+            line-height: 4rem;
+          }
+          .cta-intro > span {
+            width: 100%;
+          }
+
+          .demo-container {
+            width: 50%;
+            height: 100%;
+          }
+        }
+
+        @media screen and (min-width: 1440px) {
+          #callToAction {
+            align-items: start;
+            padding: 6rem 3rem;
+          }
+          .cta-intro {
+            justify-content: start;
+          }
+          .cta-intro > span {
+            font-size: 1.5rem;
+            width: 80%;
+          }
+        }
+
+
+
+
+
+
+
+
+
+
+
+        /* Image Comparison Slider Styles */
+        .comparison-slider-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .comparison-slider {
+            position: relative;
+            width: 100%;
+            margin: 0;
+            border: 5px white solid;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        .comparison-slider > img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .comparison-slider .overlay {
+            display: none;
+            position: absolute;
+            width: 250px;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            box-sizing: border-box;
+            color: #DDD;
+            text-align: right;
+        }
+
+        @media screen and (min-width: 767px) {
+            .comparison-slider .overlay {
+                display: block;
+            }
+        }
+
+        .comparison-slider .resize {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+        }
+
+        .comparison-slider .resize > img {
+            display: block;
+            width: 200%; /* Make image twice the container width */
+            height: 100%;
+            object-fit: cover;
+            max-width: none; /* Override any max-width constraints */
+            border-radius: 5px;
+        }
+
+        .comparison-slider .resize .overlay {
+            right: auto;
+            left: 20px;
+            text-align: left;
+        }
+
+        .comparison-slider .divider {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            cursor: ew-resize;
+            z-index: 10;
+        }
+
+        .comparison-slider .divider:before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: -9px;
+            top: 50%;
+            margin-top: -10px;
+            background-color: white;
+            transform: rotate(45deg);
+            transition: all 0.1s ease-in-out;
+            border: 2px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        .comparison-slider .divider:after {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            left: -5px;
+            top: 50%;
+            margin-top: -6px;
+            background-color: #666;
+            transform: rotate(45deg);
+            transition: all 0.1s ease-in-out;
+        }
+
+        .comparison-slider .divider.draggable:before {
+            width: 30px;
+            height: 30px;
+            left: -14px;
+            margin-top: -15px;
+            background-color: #f0f0f0;
+        }
+
+        .comparison-slider .divider.draggable:after {
+            width: 20px;
+            height: 20px;
+            left: -9px;
+            margin-top: -10px;
+            background-color: #555;
+        }
+
+        .comparison-slider-wrapper .caption {
+            position: relative;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 12px;
+            font-style: italic;
+            color: #666;
+            text-align: center;
+        }
+
+        .demo-container {
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .demo-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .integration-info {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 30px;
+        }
+
+        .integration-info h3 {
+            margin-top: 0;
+            color: #495057;
+        }
+
+        .integration-info code {
+            background-color: #e9ecef;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+  padding: 4rem 0;
+}
+
+
+
+
+
+
+.contact-intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.contact-intro > h2 {
+  text-align: center;
+}
+
+
+
+
+
+
+
+.contact-container {
+            width: 90%;
+            margin: 0 auto;
+            background-color: #111;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            border: 1px solid var(--colorborder);
+            box-shadow: var(--shadowdark);
+            position: relative;
+        }
+
+        .contact-header {
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            font: var(--links);
+            font-size: 0.9rem;
+            color: var(--colorprimary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--colorborder);
+            border-radius: 10px;
+            color: var(--colorprimary);
+            font-family: var(--fontfamily);
+            font-size: 1rem;
+            transition: all var(--transition);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--coloraccent);
+            background-color: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(124, 122, 122, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+            line-height: 1.5;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.75rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 3rem;
+        }
+
+        .checkbox-group {
+            margin-bottom: 2rem;
+        }
+
+        .checkbox-group .form-label {
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all var(--transition);
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .checkbox-item:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .checkbox-input {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--colorborder);
+            border-radius: 4px;
+            margin-right: 0.75rem;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .checkbox-input:checked {
+            background-color: var(--coloraccent);
+            border-color: var(--coloraccent);
+        }
+
+        .checkbox-input:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--colorprimary);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .checkbox-label {
+            font-size: 1rem;
+            color: var(--colorprimary);
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            background-color: var(--colorprimary);
+            color: var(--colorsecondary);
+            border: none;
+            border-radius: 10px;
+            font-family: var(--fontfamily);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            letter-spacing: 0.5px;
+        }
+
+        .submit-button:hover {
+            background-color: var(--coloraccent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        /* Two-column layout for name and email on tablets and desktop */
+        @media (min-width: 768px) {
+            .form-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Form validation styles */
+        .form-input:invalid:not(:focus):not(:placeholder-shown),
+        .form-textarea:invalid:not(:focus):not(:placeholder-shown),
+        .form-select:invalid:not(:focus) {
+            border-color: #ff4444;
+        }
+
+        .form-input:valid:not(:focus):not(:placeholder-shown),
+        .form-textarea:valid:not(:focus):not(:placeholder-shown),
+        .form-select:valid:not(:focus) {
+            border-color: #44ff44;
+        }
+
+        /* Placeholder styling */
+        ::placeholder {
+            color: var(--coloraccent);
+            opacity: 0.7;
+        }
+
+        @media screen and (min-width:1024px) {
+          #contact {
+            padding: 6rem 0;
+          }
+          .contact-container {
+            width: 800px;
+          }   
+          .contact-intro > h2 {
+            font-size: 4rem !important;
+            line-height: 4rem !important;
+          }   
+        }
+
+        @media screen and (min-width: 768px) {
+          #contact {
+            padding: 5rem 0;
+          }
+          .contact-intro > h2 {
+            font-size: 3rem;
+            line-height: 3rem;
+          }
+        }
+
+        @media screen and (min-width:1440px) {
+          .contact-container {
+            width: 1200px;
+          }      
+        }

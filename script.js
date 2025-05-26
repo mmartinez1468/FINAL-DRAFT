@@ -483,7 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     // Word rotation animation with instant disappearance
-    const words = ["Websites", "Applications", "Solutions", "Experiences", "Innovations"];
+    const words = ["Websites", "Apps", "Solutions", "Experiences", "Innovations"];
     const wordElement = document.getElementById('rotating-word');
     let currentIndex = 0;
     

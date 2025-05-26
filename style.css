@@ -973,36 +973,29 @@ body.light-mode .dropdown-item-info > p {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**************************************** 
-            LANDING SECTION
+/****************************************
+         LANDING SECTION
 ****************************************/
 #landing {
-    height: 100vh;
-    margin-top: 4.9rem;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5.5rem;
+    position: relative; /* Added for pseudo-element positioning */
+    --shadow-height: 150px; /* Adjustable shadow height variable */
+}
+
+/* Bottom shadow gradient */
+#landing::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--shadow-height);
+    background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none; /* Allows clicking through the shadow */
+    z-index: 1;
 }
 
 .landing-intro {
@@ -1010,12 +1003,12 @@ body.light-mode .dropdown-item-info > p {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: .75rem;
-    padding: 2rem 1.5rem;
     text-align: center;
     width: fit-content; 
     margin: 0 auto; 
     height: 50%;
+    position: relative;
+    z-index: 2; /* Ensures content stays above shadow */
 }
 
 .intro-icon {
@@ -1033,49 +1026,17 @@ body.light-mode .dropdown-item-info > p {
     width: fit-content; 
     font-size: 2.5rem;
     line-height: 2.5rem;
+    padding-top: 1rem;
 }
-
-
-
-.landing-image {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 30%;
-    position: relative;
-}
-
-.landing-image::after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    height: 15px;
-    background: black;
-    filter: blur(10px);
-    opacity: 0.7;
-    z-index: -1;
-}
-
-
-
-
-
-
-
-
-
 
 .word-container {
-    height: 40px;
+    height: 50px;
     position: relative;
     display: block;
     margin-top: 5px;
     overflow: hidden;
-    width: 100%; /* Make container full width */
-    text-align: center; /* Center the content */
+    width: 100%;
+    text-align: center;
 }
 
 #rotating-word {
@@ -1084,14 +1045,12 @@ body.light-mode .dropdown-item-info > p {
     font-style: italic;
     left: 0;
     top: 0;
-    width: 100%; /* Make the word span full width */
-    text-align: center; /* Center the text */
-    font-size: 2.5rem;
     width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
 }
 
 /* Animation classes for instant disappearance */
-/* Rename classes to avoid conflicts */
 .word-visible {
     display: block;
     animation: popIn 0.3s forwards;
@@ -1112,26 +1071,15 @@ body.light-mode .dropdown-item-info > p {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 .word-animation-container {
-    /* Override the regular slide-up animation */
     transform: none !important;
     opacity: 1 !important;
     font: var(--p);
     line-height: 1.5;
     display: block;
     text-align: center;
+    width: 90%;
+    padding-bottom: 1rem;
 }
 
 .animated-word {
@@ -1139,7 +1087,7 @@ body.light-mode .dropdown-item-info > p {
     opacity: 0;
     transform: translateY(15px);
     animation: wordFadeIn 0.25s ease forwards;
-    padding-right: 1px; /* Space between words */
+    padding-right: 1px;
     font-size: 1.35rem;
     color: var(--coloraccent);
 }
@@ -1155,7 +1103,7 @@ body.light-mode .dropdown-item-info > p {
     }
 }
 
-/* Apply much faster staggered delays to each word */
+/* Staggered animation delays */
 .animated-word:nth-child(1) { animation-delay: 0.4s; }
 .animated-word:nth-child(2) { animation-delay: 0.45s; }
 .animated-word:nth-child(3) { animation-delay: 0.5s; }
@@ -1165,18 +1113,6 @@ body.light-mode .dropdown-item-info > p {
 .animated-word:nth-child(7) { animation-delay: 0.7s; }
 .animated-word:nth-child(8) { animation-delay: 0.75s; }
 .animated-word:nth-child(9) { animation-delay: 0.8s; }
-
-
-
-
-
-
-
-
-
-.landing-buttons {
-
-}
 
 .landing-button-1 {
     border-radius: 10px;
@@ -1211,284 +1147,109 @@ body.light-mode .dropdown-item-info > p {
     color: var(--colorprimary);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 .landing-image {
     display: flex;
     justify-content: center;
-    width: 100%;
-    height: 30%;
-    border-radius: 10px;
-    padding: 1rem;
+    align-items: end;
+    margin-top: auto;  /* This pushes it to the bottom */
+    margin-bottom: 0;   /* Explicitly set bottom margin */
     position: relative;
-    overflow: hidden;
-}
-
-.landing-image img {
-    width: 100%;
     border-radius: 10px;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-    position: relative;
-    background-color: black;
-    opacity: .5;
 }
 
-/* Overlay for the black band and fade effect */
-.landing-image::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent 65%, /* Top 65% fully visible */
-        rgba(0,0,0,0.5) 75%, /* Start fading to black */
-        black 90%, /* Reach solid black at 90% */
-        black 100% /* Bottom 10% solid black */
-    );
-    z-index: 2;
-    pointer-events: none;
+.landing-image > img {
+  border-radius: 8px;
+  width: 90%;
+  border: 3px solid var(--colorborder);
 }
 
-/* Enhanced shadow at the bottom */
-.landing-image::after {
-    content: '';
-    position: absolute;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    height: 30px;
-    background: black;
-    filter: blur(15px);
-    opacity: 0.9;
-    z-index: -1;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.landing-stats {
-  width: 100%;
-  background-color: #000000;
-  height: 10em;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Wave separators */
-.wave-separator, .wave-separator-2 {
-  display: block;
-  width: 100%;
-  height: 120px;
-  position: relative;
-  margin-top: -2px;
-  z-index: 1;
-  overflow: hidden;
-}
-
-svg {
-  height: 100%;
-}
-
-.wave-separator svg {
-  width: 100%;
-  height: 100%;
-  background-color: var(--colorsecondary);
-}
-
-.wave-separator-2 svg {
-  width: 100%;
-  height: 100%;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.circle-divider {
-  display: block;
-  width: 100%;
-  height: 30px;
-  position: relative;
-  margin-top: -1px;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.circle-divider svg {
-  width: 100%;
-  height: 100%;
-}
-
-@media screen and (max-width: 768px) {
-  .wave-separator, .wave-separator-2 {
-    height: 2000px;
+@media screen and (min-width: 400px) {
+  .landing-image > img {
+    height: 250px;
   }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media screen and (min-width: 419px) {
-  .landing-image {
-    height: 40%;
+  .word-animation-container {
+    width: 100%;
   }
 }
 
 @media screen and (min-width: 768px) {
   #landing {
-    height: 80vh;
+    height: 100vh;
+    --shadow-height: 250px; /* Even larger shadow on desktop */
   }
-  
-  .landing-intro {
-    padding-top: 4rem;
+  .landing-intro > h2 {
+    font-size: 3rem;
+    line-height: 3rem;
   }
-  
+  #rotating-word {
+    font-size: 3.5rem;
+  }
+  .word-container {
+    height: 60px;
+  }
+  .landing-image {
+    margin-top: unset;  /* This pushes it to the bottom */
+  }
+  .landing-image > img {
+    height: 400px;
+  }
   .landing-buttons {
     display: flex;
     gap: 1rem;
-    padding: 1rem 0;
   }
-  
   .landing-button-2 {
     display: flex;
   }
-
-  .landing-image {
-    height: 80%;
-  }
-
-  .landing-image img {
-    opacity: 1;
-  }
-
-  .animated-word {
-    font-size: 1.75rem;
-    line-height: 1rem;
-  }
-
-  .landing-intro h2 {
-    font-size: 3.25rem;
-  }
-
-  .word-container {
-    height: 60px;
-    margin-top: 15px;
-  }
-
-  #rotating-word {
-    font-size: 3.5rem;
-    height: auto;
-  }
-
   .landing-button-1, .landing-button-2 {
     font-size: 1.25rem;
-    padding: .5rem 2rem;
+    padding: .5rem 1rem;
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1023px) {
   #landing {
-    background-color: unset;
+    height: 100vh;
+    --shadow-height: 250px; /* Even larger shadow on desktop */
   }
-  
-  .landing-intro {
-    height: 60%;
+  .landing-intro > h2 {
+    font-size: 4rem;
+    line-height: 4rem;
   }
-
-
-  .landing-image {
-    height: 100%;
-    padding: 0 6rem;
+  #rotating-word {
+    font-size: 4.5rem;
   }
-
-  .landing-image img {
-    opacity: 1;
+  .landing-image > img {
+    width: 80%;
+  }
+  .word-container {
+    height: 80px;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .landing-intro {
-    height: 80%;
+  #landing {
+    height: 120vh;
+    --shadow-height: 350px; /* Even larger shadow on desktop */
   }
-  .landing-intro h2 {
-    font-size: 5rem;
-  }
-  #rotating-word {
-    font-size: 5.5rem;
-    margin-top: 2rem;
-  }
-  .word-container {
-    margin-top: 15px;
-    height: 100px;
-  }
-
-  .landing-intro h2 {
-    margin-top: 2rem;
-  }
-
-  .landing-button-1, .landing-button-2 {
-    font-size: 1.25rem;
-    padding: .75rem 2rem;
-  }
-
-  .landing-image {
-    padding: 0 10rem;
+  .landing-image > img {
+    height: 500px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1619,43 +1380,7 @@ svg {
 
 
 
-/* Fixes Landing */
-#landing {
-  position: relative;
-  /* Keep original height - don't modify */
-  margin-bottom: 0;
-  z-index: 1;
-}
-#variety {
-  position: relative;
-  z-index: 1;
-  /* Explicitly set top position to start after landing */
-}
-.landing-image {
-  position: relative;
-  /* Keep all existing styles as is */
-}
-.landing-stats {
-  position: relative;
-  /* Keep original height - don't modify */
-  z-index: 1;
-}
-@media screen and (min-width: 768px) {
-  #variety {
-    /* Adjust this value if the landing section height changes at this breakpoint */
-    margin-top: 25vh; /* Larger value for desktop */
-  }
-}
-@media screen and (min-width: 1024px) {
-  #variety {
-    margin-top: 49vh; /* Full viewport height for larger screens */
-  }
-}
-@media screen and (min-width: 1440px) {
-  #variety {
-    margin-top: 65vh; /* Adjusted for small tablets/large phones */
-  }
-}
+
 
 
 

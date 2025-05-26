@@ -1,97 +1,78 @@
 // Toggle mobile menu
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-        
-        // Mobile dropdown toggles
-        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Mobile dropdown toggles
+const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+        // Only handle clicks on mobile
+        if (window.innerWidth <= 992) {
+            e.preventDefault();
+            this.classList.toggle('active');
+            
+            // Find the dropdown associated with this toggle
+            const dropdown = this.nextElementSibling;
+            dropdown.classList.toggle('active');
+            
+            // Close other dropdowns
+            dropdownToggles.forEach(otherToggle => {
+                if (otherToggle !== toggle) {
+                    otherToggle.classList.remove('active');
+                    otherToggle.nextElementSibling.classList.remove('active');
+                }
+            });
+        }
+    });
+});
+
+// Close mobile menu when clicking on a regular nav link (not dropdown toggle)
+document.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(link => {
+    link.addEventListener('click', () => {
+        if (hamburger.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
+    });
+});
+
+// Close mobile menu when clicking on a dropdown link
+document.querySelectorAll('.dropdown-link').forEach(link => {
+    link.addEventListener('click', () => {
+        if (hamburger.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            
+            // Also close the active dropdown
+            document.querySelectorAll('.dropdown-toggle.active').forEach(active => {
+                active.classList.remove('active');
+                active.nextElementSibling.classList.remove('active');
+            });
+        }
+    });
+});
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 992) {
+        // Reset mobile menu and dropdowns for desktop view
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
         
         dropdownToggles.forEach(toggle => {
-            toggle.addEventListener('click', function(e) {
-                // Only handle clicks on mobile
-                if (window.innerWidth <= 992) {
-                    e.preventDefault();
-                    this.classList.toggle('active');
-                    
-                    // Find the dropdown associated with this toggle
-                    const dropdown = this.nextElementSibling;
-                    dropdown.classList.toggle('active');
-                    
-                    // Close other dropdowns
-                    dropdownToggles.forEach(otherToggle => {
-                        if (otherToggle !== toggle) {
-                            otherToggle.classList.remove('active');
-                            otherToggle.nextElementSibling.classList.remove('active');
-                        }
-                    });
-                }
-            });
-        });
-        
-        // Close mobile menu when clicking on a regular nav link (not dropdown toggle)
-        document.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(link => {
-            link.addEventListener('click', () => {
-                if (hamburger.classList.contains('active')) {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                }
-            });
-        });
-        
-        // Close mobile menu when clicking on a dropdown link
-        document.querySelectorAll('.dropdown-link').forEach(link => {
-            link.addEventListener('click', () => {
-                if (hamburger.classList.contains('active')) {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    
-                    // Also close the active dropdown
-                    document.querySelectorAll('.dropdown-toggle.active').forEach(active => {
-                        active.classList.remove('active');
-                        active.nextElementSibling.classList.remove('active');
-                    });
-                }
-            });
-        });
-        
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 992) {
-                // Reset mobile menu and dropdowns for desktop view
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                
-                dropdownToggles.forEach(toggle => {
-                    toggle.classList.remove('active');
-                    if (toggle.nextElementSibling) {
-                        toggle.nextElementSibling.classList.remove('active');
-                    }
-                });
+            toggle.classList.remove('active');
+            if (toggle.nextElementSibling) {
+                toggle.nextElementSibling.classList.remove('active');
             }
         });
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
+    }
+});
 
 // IIFE to isolate the slider code and prevent conflicts with navbar
 (function() {
@@ -169,29 +150,8 @@
             clearInterval(interval);
             startAutoRotation();
         }
-        
-
-        
     });
-})(); // Self-executing function to isolate scope
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+})();
 
 // Default text to display
 const defaultText = "Welcome to our site. We create amazing experiences for our customers.";
@@ -258,36 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
     animateElement(typewriter);
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
 // Intersection Observer to handle animations when elements enter viewport
 document.addEventListener('DOMContentLoaded', function() {
   // Get all elements with the 'animate' class
@@ -331,155 +261,93 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 100);
 });
 
+// Theme toggle functionality - DARK MODE FIRST
+// In-memory theme storage (no localStorage)
+let currentTheme = 'dark'; // Default to dark mode
 
-
-
-
-
-
-
-
-
-
-
-
-        // Theme toggle functionality
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-switch');
     
-    // Check for saved theme preference or use system preference
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-mode');
-    } else if (savedTheme === 'dark') {
-        document.body.classList.remove('light-mode');
-    } else {
-        // If no saved preference, check system preference
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-            document.body.classList.add('light-mode');
-        }
-    }
+    // Always start with dark mode (remove light-mode class if present)
+    document.body.classList.remove('light-mode');
+    currentTheme = 'dark';
     
     // Toggle theme when button is clicked
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-mode');
-        
-        // Save preference to localStorage
-        if (document.body.classList.contains('light-mode')) {
-            localStorage.setItem('theme', 'light');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            
+            // Update in-memory preference
+            if (document.body.classList.contains('light-mode')) {
+                currentTheme = 'light';
+            } else {
+                currentTheme = 'dark';
+            }
+        });
+    }
+    
+    // Optional: Listen for system preference changes (but always default to dark)
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
+            // Only respond to system changes if user hasn't manually set preference
+            // For now, we'll ignore system preference and stick with dark mode default
+            console.log('System theme changed, but maintaining current theme:', currentTheme);
+        });
+    }
+});
+
+// Global state for pricing
+let isYearly = false;
+
+// Function to update all pricing displays
+function updateAllPrices() {
+    const priceElements = document.querySelectorAll('[data-price="pricing"]');
+    const toggleElements = document.querySelectorAll('[data-toggle="pricing"]');
+    
+    // Update all toggle switches
+    toggleElements.forEach(toggle => {
+        if (isYearly) {
+            toggle.classList.add('active');
         } else {
-            localStorage.setItem('theme', 'dark');
+            toggle.classList.remove('active');
         }
     });
     
-    // Listen for system preference changes
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-        if (!localStorage.getItem('theme')) { // Only if user hasn't set preference
-            if (e.matches) {
-                document.body.classList.add('light-mode');
-            } else {
-                document.body.classList.remove('light-mode');
-            }
+    // Update all price displays
+    priceElements.forEach(priceElement => {
+        // Get the monthly price from the data attribute
+        let monthlyPrice = parseInt(priceElement.getAttribute('data-monthly')) || 10;
+        
+        const yearlyPrice = monthlyPrice * 10; // 20% discount on yearly
+        const yearlySavings = monthlyPrice * 12 - yearlyPrice;
+        const savingsPercent = Math.round((yearlySavings / (monthlyPrice * 12)) * 100);
+        
+        if (isYearly) {
+            priceElement.innerHTML = `
+                <p>$${yearlyPrice} /year</p>
+                <p style="font-size: 14px; color: #7c7a7a; margin-top: 5px;">
+                    Save $${yearlySavings} (${savingsPercent}% off)
+                </p>`;
+        } else {
+            priceElement.innerHTML = `
+                <p>$${monthlyPrice} /month</p>
+                <p style="font-size: 14px; color: #7c7a7a; margin-top: 5px;">
+                    $${monthlyPrice * 12} /year (Save ${savingsPercent}% yearly)
+                </p>`;
         }
+    });
+}
+
+// Setup event listeners for all toggles
+document.querySelectorAll('[data-toggle="pricing"]').forEach(toggle => {
+    toggle.addEventListener('click', function() {
+        isYearly = !isYearly;
+        updateAllPrices();
     });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Global state for pricing
-        let isYearly = false;
-        
-        // Function to update all pricing displays
-        function updateAllPrices() {
-            const priceElements = document.querySelectorAll('[data-price="pricing"]');
-            const toggleElements = document.querySelectorAll('[data-toggle="pricing"]');
-            
-            // Update all toggle switches
-            toggleElements.forEach(toggle => {
-                if (isYearly) {
-                    toggle.classList.add('active');
-                } else {
-                    toggle.classList.remove('active');
-                }
-            });
-            
-            // Update all price displays
-            priceElements.forEach(priceElement => {
-                // Get the monthly price from the data attribute
-                let monthlyPrice = parseInt(priceElement.getAttribute('data-monthly')) || 10;
-                
-                const yearlyPrice = monthlyPrice * 10; // 20% discount on yearly
-                const yearlySavings = monthlyPrice * 12 - yearlyPrice;
-                const savingsPercent = Math.round((yearlySavings / (monthlyPrice * 12)) * 100);
-                
-                if (isYearly) {
-                    priceElement.innerHTML = `
-                        <p>$${yearlyPrice} /year</p>
-                        <p style="font-size: 14px; color: #7c7a7a; margin-top: 5px;">
-                            Save $${yearlySavings} (${savingsPercent}% off)
-                        </p>`;
-                } else {
-                    priceElement.innerHTML = `
-                        <p>$${monthlyPrice} /month</p>
-                        <p style="font-size: 14px; color: #7c7a7a; margin-top: 5px;">
-                            $${monthlyPrice * 12} /year (Save ${savingsPercent}% yearly)
-                        </p>`;
-                }
-            });
-        }
-        
-        // Setup event listeners for all toggles
-        document.querySelectorAll('[data-toggle="pricing"]').forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                isYearly = !isYearly;
-                updateAllPrices();
-            });
-        });
-        
-        // Initialize prices on page load
-        updateAllPrices();
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
+// Initialize prices on page load
+updateAllPrices();
 
 document.addEventListener('DOMContentLoaded', () => {
     // Word rotation animation with instant disappearance
@@ -510,31 +378,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const toggleSwitch = document.querySelector('.toggle-switch-pricing');
     const toggleSlider = document.querySelector('.toggle-slider-pricing');
@@ -553,44 +396,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
   const webButton = document.querySelector('.switch-plans-web');
@@ -956,48 +761,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
   // Only apply on desktop (matching your media query)
   if (window.innerWidth >= 993) {
@@ -1034,35 +797,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Simple navbar background after scrolling a little bit
 function initNavbarBlur() {
     const navbar = document.querySelector('.navbar');
@@ -1091,218 +825,127 @@ function initNavbarBlur() {
 // Initialize when DOM loads
 document.addEventListener('DOMContentLoaded', () => {
     initNavbarBlur();
-    // ... other functions
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Image Comparison Slider - Vanilla JavaScript
-        function initImageComparisonSliders() {
-            const compSliders = document.querySelectorAll('.comparison-slider');
-            
-            if (compSliders.length === 0) return;
-            
-            // Initialize each slider
-            compSliders.forEach(function(slider) {
-                const sliderWidth = slider.offsetWidth + 'px';
-                const resizeImg = slider.querySelector('.resize img');
-                if (resizeImg) {
-                    resizeImg.style.width = sliderWidth;
-                }
-                
-                const divider = slider.querySelector('.divider');
-                const resize = slider.querySelector('.resize');
-                
-                if (divider && resize) {
-                    setupDragging(divider, resize, slider);
-                }
-            });
-            
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                compSliders.forEach(function(slider) {
-                    const sliderWidth = slider.offsetWidth + 'px';
-                    const resizeImg = slider.querySelector('.resize img');
-                    if (resizeImg) {
-                        resizeImg.style.width = sliderWidth;
-                    }
-                });
-            });
+function initImageComparisonSliders() {
+    const compSliders = document.querySelectorAll('.comparison-slider');
+    
+    if (compSliders.length === 0) return;
+    
+    // Initialize each slider
+    compSliders.forEach(function(slider) {
+        const sliderWidth = slider.offsetWidth + 'px';
+        const resizeImg = slider.querySelector('.resize img');
+        if (resizeImg) {
+            resizeImg.style.width = sliderWidth;
         }
+        
+        const divider = slider.querySelector('.divider');
+        const resize = slider.querySelector('.resize');
+        
+        if (divider && resize) {
+            setupDragging(divider, resize, slider);
+        }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        compSliders.forEach(function(slider) {
+            const sliderWidth = slider.offsetWidth + 'px';
+            const resizeImg = slider.querySelector('.resize img');
+            if (resizeImg) {
+                resizeImg.style.width = sliderWidth;
+            }
+        });
+    });
+}
 
-        function setupDragging(dragElement, resizeElement, container) {
-            let isDragging = false;
-            let touched = false;
+function setupDragging(dragElement, resizeElement, container) {
+    let isDragging = false;
+    let touched = false;
+    
+    // Detect touch devices
+    window.addEventListener('touchstart', function() {
+        touched = true;
+    });
+    
+    window.addEventListener('touchend', function() {
+        touched = false;
+    });
+    
+    function startDrag(e) {
+        isDragging = true;
+        
+        dragElement.classList.add('draggable');
+        resizeElement.classList.add('resizable');
+        
+        const startX = e.pageX || (e.touches && e.touches[0].pageX);
+        const dragWidth = dragElement.offsetWidth;
+        const posX = dragElement.getBoundingClientRect().left + dragWidth - startX;
+        const containerRect = container.getBoundingClientRect();
+        const containerOffset = containerRect.left;
+        const containerWidth = containerRect.width;
+        const minLeft = containerOffset + 10;
+        const maxLeft = containerOffset + containerWidth - dragWidth - 10;
+        
+        function handleMove(e) {
+            if (!isDragging) return;
             
-            // Detect touch devices
-            window.addEventListener('touchstart', function() {
-                touched = true;
-            });
-            
-            window.addEventListener('touchend', function() {
-                touched = false;
-            });
-            
-            function startDrag(e) {
-                isDragging = true;
-                
-                dragElement.classList.add('draggable');
-                resizeElement.classList.add('resizable');
-                
-                const startX = e.pageX || (e.touches && e.touches[0].pageX);
-                const dragWidth = dragElement.offsetWidth;
-                const posX = dragElement.getBoundingClientRect().left + dragWidth - startX;
-                const containerRect = container.getBoundingClientRect();
-                const containerOffset = containerRect.left;
-                const containerWidth = containerRect.width;
-                const minLeft = containerOffset + 10;
-                const maxLeft = containerOffset + containerWidth - dragWidth - 10;
-                
-                function handleMove(e) {
-                    if (!isDragging) return;
-                    
-                    if (!touched) {
-                        e.preventDefault();
-                    }
-                    
-                    const moveX = e.pageX || (e.touches && e.touches[0].pageX);
-                    let leftValue = moveX + posX - dragWidth;
-                    
-                    // Constrain movement within container bounds
-                    if (leftValue < minLeft) {
-                        leftValue = minLeft;
-                    } else if (leftValue > maxLeft) {
-                        leftValue = maxLeft;
-                    }
-                    
-                    const widthValue = ((leftValue + dragWidth / 2 - containerOffset) * 100 / containerWidth) + '%';
-                    
-                    dragElement.style.left = widthValue;
-                    resizeElement.style.width = widthValue;
-                }
-                
-                function stopDrag() {
-                    if (!isDragging) return;
-                    
-                    isDragging = false;
-                    dragElement.classList.remove('draggable');
-                    resizeElement.classList.remove('resizable');
-                    
-                    document.removeEventListener('mousemove', handleMove);
-                    document.removeEventListener('mouseup', stopDrag);
-                    document.removeEventListener('touchmove', handleMove);
-                    document.removeEventListener('touchend', stopDrag);
-                    document.removeEventListener('touchcancel', stopDrag);
-                }
-                
-                document.addEventListener('mousemove', handleMove);
-                document.addEventListener('mouseup', stopDrag);
-                document.addEventListener('touchmove', handleMove);
-                document.addEventListener('touchend', stopDrag);
-                document.addEventListener('touchcancel', stopDrag);
+            if (!touched) {
+                e.preventDefault();
             }
             
-            // Add event listeners for drag start
-            dragElement.addEventListener('mousedown', startDrag);
-            dragElement.addEventListener('touchstart', startDrag);
+            const moveX = e.pageX || (e.touches && e.touches[0].pageX);
+            let leftValue = moveX + posX - dragWidth;
+            
+            // Constrain movement within container bounds
+            if (leftValue < minLeft) {
+                leftValue = minLeft;
+            } else if (leftValue > maxLeft) {
+                leftValue = maxLeft;
+            }
+            
+            const widthValue = ((leftValue + dragWidth / 2 - containerOffset) * 100 / containerWidth) + '%';
+            
+            dragElement.style.left = widthValue;
+            resizeElement.style.width = widthValue;
         }
-
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initImageComparisonSliders);
-        } else {
-            initImageComparisonSliders();
+        
+        function stopDrag() {
+            if (!isDragging) return;
+            
+            isDragging = false;
+            dragElement.classList.remove('draggable');
+            resizeElement.classList.remove('resizable');
+            
+            document.removeEventListener('mousemove', handleMove);
+            document.removeEventListener('mouseup', stopDrag);
+            document.removeEventListener('touchmove', handleMove);
+            document.removeEventListener('touchend', stopDrag);
+            document.removeEventListener('touchcancel', stopDrag);
         }
+        
+        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('mouseup', stopDrag);
+        document.addEventListener('touchmove', handleMove);
+        document.addEventListener('touchend', stopDrag);
+        document.addEventListener('touchcancel', stopDrag);
+    }
+    
+    // Add event listeners for drag start
+    dragElement.addEventListener('mousedown', startDrag);
+    dragElement.addEventListener('touchstart', startDrag);
+}
 
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initImageComparisonSliders);
+} else {
+    initImageComparisonSliders();
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  class TriangleDivider {
+class TriangleDivider {
     constructor(element) {
         this.element = element;
         this.shape = element.querySelector('.triangle-shape');

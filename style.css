@@ -354,10 +354,12 @@ th, td {
   z-index: -10; /* Lower z-index to ensure it stays behind all content */
 }
 
-.gradient {
+
+
+      .gradient {
         position: absolute;
         border-radius: 100%;
-        opacity: 0.6;
+        opacity: 1;
         mix-blend-mode: screen;
         animation-iteration-count: infinite;
         animation-timing-function: cubic-bezier(0.1, 0, 0.9, 1);
@@ -365,33 +367,33 @@ th, td {
 
       
   .gradient-1 {
-    background: rgb(42, 11, 174) none repeat scroll 0% 0% / auto padding-box border-box;
+    background: rgb(75, 0, 130) none repeat scroll 0% 0% / auto padding-box border-box;
     width: 700px;
     height: 700px;
-    animation-duration: 11s;
-    opacity: 0.6;
+    animation-duration: 8s;
+    opacity: 1;
     left: 60%;
     top: 40%;
     z-index: -2;
     animation-name: animation-gradient-1;
   }
   .gradient-2 {
-    background: rgb(137, 167, 240) none repeat scroll 0% 0% / auto padding-box border-box;
+    background: rgb(0, 136, 255) none repeat scroll 0% 0% / auto padding-box border-box;
     width: 600px;
     height: 600px;
-    animation-duration: 11s;
-    opacity: 0.6;
+    animation-duration: 10s;
+    opacity: 1;
     left: 40%;
     top: 60%;
     z-index: -1;
     animation-name: animation-gradient-2;
   }
   .gradient-3 {
-    background: rgb(246, 26, 95) none repeat scroll 0% 0% / auto padding-box border-box;
+    background: rgb(0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
     width: 500px;
     height: 500px;
     animation-duration: 11s;
-    opacity: 0.6;
+    opacity: 1;
     left: 50%;
     top: 50%;
     z-index: -3;
@@ -465,6 +467,84 @@ th, td {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      /* Mobile-specific gradient adjustments for brighter, more visible animation */
+
+@media (max-width: 768px) {
+  .plasma-wrapper {
+    filter: blur(150px); /* Less blur to show more animation detail */
+  }
+  
+  .gradient-1 {
+    background: rgb(147, 51, 234); /* Brighter purple */
+    width: 500px;
+    height: 500px;
+    opacity: 0.8;
+  }
+  
+  .gradient-2 {
+    background: rgb(59, 130, 246); /* Brighter blue */
+    width: 450px;
+    height: 450px;
+    opacity: 0.7;
+  }
+  
+  .gradient-3 {
+    background: rgb(100, 100, 100); /* Light gray instead of black */
+    width: 400px;
+    height: 400px;
+    opacity: 0.4;
+  }
+}
+
+/* Extra small screens - even brighter */
+@media (max-width: 480px) {
+  .plasma-wrapper {
+    filter: blur(100px); /* Minimal blur for maximum animation visibility */
+  }
+  
+  .gradient-1 {
+    background: rgb(168, 85, 247); /* Even brighter purple */
+    opacity: 0.9;
+    width: 400px;
+    height: 400px;
+  }
+  
+  .gradient-2 {
+    background: rgb(96, 165, 250); /* Even brighter blue */
+    opacity: 0.8;
+    width: 350px;
+    height: 350px;
+  }
+  
+  .gradient-3 {
+    background: rgb(156, 163, 175); /* Light gray */
+    opacity: 0.5;
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* Optional: Add this if you want even more vibrant colors on mobile */
+@media (max-width: 768px) {
+  .plasma-wrapper {
+    /* Increase saturation and brightness */
+    filter: blur(150px) saturate(1.3) brightness(1.2);
+  }
+}
 
 
 
@@ -1447,7 +1527,8 @@ body.light-mode .dropdown-item-info > p {
     position: relative;
     overflow: hidden;
     border-radius: 1px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 0px solid #111;
+    outline: 3px solid var(--colorborder);
     border-radius: 10px;
     height: 175px; /* Default height for mobile */
     
@@ -1474,7 +1555,6 @@ body.light-mode .dropdown-item-info > p {
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    border: 3px solid var(--colorborder);
 }
 
 /* Navigation Buttons Under Images */
@@ -1714,7 +1794,7 @@ body.light-mode .variety-nav-item.variety-active {
 
 
         #services {
-            padding: 4rem 0rem;
+            padding-bottom: 4rem;
         }
 
         .services-intro {
@@ -1742,8 +1822,8 @@ body.light-mode .variety-nav-item.variety-active {
             width: 90%;
             border-radius: 10px;
             padding: 2rem 1rem;
-            border: .5px solid var(--colorborder);
-            border-color: rgba(255, 255, 255, .1);
+            border: 1px solid #111;
+            outline: .5px solid var(--colorborder);
         }
 
         .services-card-intro {
@@ -1850,13 +1930,13 @@ body.light-mode .variety-nav-item.variety-active {
 
         @media screen and (min-width: 768px) {
           #services {
-            padding: 5rem 0rem;
+            padding-bottom: 5rem;
           }
         }
 
         @media screen and (min-width: 1024px) {
           #services {
-            padding: 6rem 0rem;
+            padding-bottom: 6rem;
           }
           .services-intro > h2 {
             font-size: 4rem;
@@ -2444,3 +2524,109 @@ body.light-mode .variety-nav-item.variety-active {
             width: 1200px;
           }      
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Triangle Divider Styles */
+.triangle-divider {
+    position: relative;
+    height: 120px;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Larger viewports - make more visible */
+@media (min-width: 768px) {
+    .triangle-divider {
+        height: 180px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .triangle-divider {
+        height: 240px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .triangle-divider {
+        height: 300px;
+    }
+}
+
+.triangle-shape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: center top;
+}
+
+/* Animation states */
+.triangle-divider.collapsed .triangle-shape {
+    clip-path: polygon(0 0, 100% 0, 30% 15%, 0 0);
+}
+
+.triangle-divider.fully-collapsed .triangle-shape {
+    clip-path: polygon(0 0, 100% 0, 30% 30%, 0 0);
+}
+
+/* Responsive design */
+@media (max-width: 767px) {
+    .triangle-divider {
+        height: 80px; /* Smaller on mobile */
+    }
+}
+
+@media (min-width: 768px) {
+    .triangle-divider {
+        height: 180px; /* Tablet */
+    }
+}
+
+@media (min-width: 1200px) {
+    .triangle-divider {
+        height: 240px; /* Desktop */
+    }
+}
+
+@media (min-width: 1600px) {
+    .triangle-divider {
+        height: 300px; /* Large desktop */
+    }
+}

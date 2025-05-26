@@ -1265,3 +1265,112 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             initImageComparisonSliders();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  class TriangleDivider {
+    constructor(element) {
+        this.element = element;
+        this.shape = element.querySelector('.triangle-shape');
+        this.init();
+    }
+
+    init() {
+        this.updateOnScroll();
+        window.addEventListener('scroll', () => this.updateOnScroll());
+        window.addEventListener('resize', () => this.updateOnScroll());
+    }
+
+    updateOnScroll() {
+        const rect = this.element.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Check if element is visible on screen
+        const isVisible = rect.bottom > 0 && rect.top < windowHeight;
+        
+        if (!isVisible) {
+            // Reset to flat when not visible
+            this.element.classList.remove('collapsed', 'fully-collapsed');
+            this.shape.style.clipPath = 'polygon(0 0, 100% 0, 100% 0, 0 0)';
+            this.shape.style.opacity = '1';
+            return;
+        }
+        
+        // Calculate animation progress as soon as element becomes visible
+        const elementTop = rect.top;
+        
+        let scrollProgress;
+        
+        if (elementTop > 0) {
+            // Element is entering viewport from bottom
+            scrollProgress = Math.max(0, (windowHeight - elementTop) / windowHeight);
+        } else {
+            // Element is exiting viewport from top
+            scrollProgress = Math.min(1, Math.max(0, (windowHeight - elementTop) / (windowHeight + rect.height)));
+        }
+        
+        // Ensure progress is between 0 and 1
+        scrollProgress = Math.max(0, Math.min(1, scrollProgress));
+
+        // Remove existing classes
+        this.element.classList.remove('collapsed', 'fully-collapsed');
+        
+        // Apply collapse states based on scroll progress
+        if (scrollProgress > 0.3) {
+            this.element.classList.add('collapsed');
+        }
+        
+        if (scrollProgress > 0.7) {
+            this.element.classList.add('fully-collapsed');
+        }
+
+        // Triangle slowly appears from flat to 30% height, pointing at 30% from left
+        // Start completely flat (0%) and grow to 30% of div height
+        const triangleHeight = Math.min(30, scrollProgress * 30); // 0% to 30%
+        
+        // Create the triangle shape that slowly emerges, pointing at 30% from left
+        // This creates a filled triangle from left edge to right edge to point and back
+        this.shape.style.clipPath = `polygon(0 0, 100% 0, 30% ${triangleHeight}%, 0 0)`;
+        this.shape.style.opacity = '1';
+    }
+}
+
+// Initialize all triangle dividers when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const dividers = document.querySelectorAll('.triangle-divider');
+    dividers.forEach(divider => new TriangleDivider(divider));
+});

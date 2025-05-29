@@ -351,7 +351,7 @@ updateAllPrices();
 
 document.addEventListener('DOMContentLoaded', () => {
     // Word rotation animation with instant disappearance
-    const words = ["Websites", "Apps", "Solutions", "Experiences", "Innovations"];
+    const words = ["Websites", "Experiences", "Solutions", "Presence", "Innovations"];
     const wordElement = document.getElementById('rotating-word');
     let currentIndex = 0;
     
@@ -962,7 +962,7 @@ class TriangleDivider {
         const rect = this.element.getBoundingClientRect();
         const windowHeight = window.innerHeight;
         
-        // Check if element is visible on screen
+        // Check if triangle divider element is visible
         const isVisible = rect.bottom > 0 && rect.top < windowHeight;
         
         if (!isVisible) {
@@ -992,18 +992,20 @@ class TriangleDivider {
         // Remove existing classes
         this.element.classList.remove('collapsed', 'fully-collapsed');
         
-        // Apply collapse states based on scroll progress
-        if (scrollProgress > 0.3) {
+        // Apply collapse states immediately when visible - start animation right away
+        if (scrollProgress > 0.1) {
             this.element.classList.add('collapsed');
         }
         
-        if (scrollProgress > 0.7) {
+        if (scrollProgress > 0.5) {
             this.element.classList.add('fully-collapsed');
         }
 
-        // Triangle slowly appears from flat to 30% height, pointing at 30% from left
-        // Start completely flat (0%) and grow to 30% of div height
-        const triangleHeight = Math.min(30, scrollProgress * 30); // 0% to 30%
+        // Triangle appears immediately and grows more aggressively for instant visibility
+        // Give it a minimum height of 5% so it's immediately visible, then grow to 30%
+        const minHeight = 8; // Minimum 5% height for immediate visibility
+        const maxHeight = 30; // Maximum 30% height
+        const triangleHeight = Math.min(maxHeight, minHeight + (scrollProgress * (maxHeight - minHeight)));
         
         // Create the triangle shape that slowly emerges, pointing at 30% from left
         // This creates a filled triangle from left edge to right edge to point and back
@@ -1016,4 +1018,96 @@ class TriangleDivider {
 document.addEventListener('DOMContentLoaded', function() {
     const dividers = document.querySelectorAll('.triangle-divider');
     dividers.forEach(divider => new TriangleDivider(divider));
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Knowledge Header Loader Animation
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all knowledge text headers
+    const knowledgeHeaders = document.querySelectorAll('.knowledgeTextHeader');
+    
+    // Create intersection observer for header animations
+    const headerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Add loader animation class when header comes into view
+                entry.target.classList.add('loader-active');
+                
+                // Optional: Unobserve after animation to prevent re-triggering
+                // headerObserver.unobserve(entry.target);
+            } else {
+                // Optional: Remove class when out of view to allow re-animation
+                entry.target.classList.remove('loader-active');
+            }
+        });
+    }, {
+        threshold: 1, // Trigger when 30% of the header is visible
+        rootMargin: '0px 0px -50px 0px' // Slight offset from bottom
+    });
+    
+    // Observe all knowledge headers
+    knowledgeHeaders.forEach(header => {
+        headerObserver.observe(header);
+    });
 });

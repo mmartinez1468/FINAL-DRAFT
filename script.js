@@ -1206,113 +1206,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-// Safari video playback fix
+// Safari video autoplay fix - simple version
 document.addEventListener('DOMContentLoaded', function() {
     const video = document.querySelector('.comparison-slider video');
     
     if (!video) return;
     
-    // Force video to load and play on Safari
-    function initializeVideo() {
-        // Set video properties programmatically for better Safari support
-        video.muted = true;
-        video.autoplay = true;
-        video.loop = true;
-        video.playsInline = true;
-        video.setAttribute('playsinline', '');
-        video.setAttribute('webkit-playsinline', '');
-        
-        // Load the video
-        video.load();
-        
-        // Attempt to play after a short delay
-        setTimeout(() => {
-            const playPromise = video.play();
-            
-            if (playPromise !== undefined) {
-                playPromise
-                    .then(() => {
-                        console.log('Video started playing successfully');
-                    })
-                    .catch(error => {
-                        console.log('Auto-play was prevented:', error);
-                        // If autoplay fails, try again on user interaction
-                        setupUserInteractionPlay();
-                    });
-            }
-        }, 100);
-    }
+    // Set video properties for Safari autoplay
+    video.muted = true;
+    video.autoplay = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
     
-    // Setup play on user interaction if autoplay fails
-    function setupUserInteractionPlay() {
-        const playOnInteraction = () => {
-            video.play().then(() => {
-                console.log('Video playing after user interaction');
-                // Remove event listeners after successful play
-                document.removeEventListener('touchstart', playOnInteraction);
-                document.removeEventListener('click', playOnInteraction);
-                document.removeEventListener('scroll', playOnInteraction);
-            }).catch(error => {
-                console.log('Video play failed:', error);
-            });
-        };
-        
-        // Try to play on various user interactions
-        document.addEventListener('touchstart', playOnInteraction, { once: true });
-        document.addEventListener('click', playOnInteraction, { once: true });
-        document.addEventListener('scroll', playOnInteraction, { once: true });
-    }
+    // Load and start the video
+    video.load();
     
-    // Handle video loading events
-    video.addEventListener('loadedmetadata', () => {
-        console.log('Video metadata loaded');
+    // Ensure video plays when loaded
+    video.addEventListener('loadeddata', () => {
+        video.play().catch(() => {
+            // Silently handle any autoplay restrictions
+        });
     });
     
-    video.addEventListener('canplay', () => {
-        console.log('Video can start playing');
-        // Ensure video is playing
-        if (video.paused) {
-            video.play().catch(error => {
-                console.log('Play attempt failed:', error);
-            });
-        }
-    });
-    
-    video.addEventListener('error', (e) => {
-        console.error('Video error:', e);
-    });
-    
-    // Initialize video
-    initializeVideo();
-    
-    // Re-initialize on page visibility change (helpful for Safari)
+    // Handle page visibility to restart video if needed
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden && video.paused) {
-            video.play().catch(error => {
-                console.log('Resume play failed:', error);
+            video.play().catch(() => {
+                // Silently handle any play restrictions
             });
         }
     });
-    
-    // Intersection Observer to play video when in view (Safari optimization)
-    if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (video.paused) {
-                        video.play().catch(error => {
-                            console.log('Intersection play failed:', error);
-                        });
-                    }
-                } else {
-                    // Optionally pause when out of view to save resources
-                    // video.pause();
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        observer.observe(video);
-    }
 });

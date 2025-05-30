@@ -1457,6 +1457,10 @@ body.light-mode .word-animation-container > .animated-word {
   to { --dual-border-angle: 360deg; }
 }
 
+body.light-mode .knife-edge-border {
+    box-shadow: none;
+}
+
 
 /* ==========================================================================
    9. VARIETY SECTION

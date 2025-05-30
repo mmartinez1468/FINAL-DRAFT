@@ -2616,6 +2616,94 @@ body.light-mode .services-card {
     max-width: 100%; /* Ensure it doesn't exceed container width */
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* Safari-specific video fixes */
+.comparison-slider video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    object-fit: cover;
+    
+    /* Safari-specific properties */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    
+    /* Ensure video renders properly on Safari */
+    will-change: transform;
+    
+    /* Remove any default video controls styling */
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* Safari mobile specific fixes */
+@media screen and (max-width: 768px) {
+    .comparison-slider video {
+        /* Force hardware acceleration on mobile Safari */
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        
+        /* Prevent Safari from showing video controls */
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+    }
+}
+
+/* Ensure video container doesn't cause layout issues on Safari */
+.comparison-slider {
+    /* Force hardware acceleration */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    
+    /* Prevent any weird rendering issues */
+    -webkit-perspective: 1000;
+    perspective: 1000;
+}
+
+/* Loading state for video */
+.comparison-slider video:not([data-loaded]) {
+    background-color: #f0f0f0;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="20" fill="none" stroke="%23ccc" stroke-width="2"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40px 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* CTA Responsive Design */
 @media screen and (min-width: 767px) {
     .comparison-slider .overlay {

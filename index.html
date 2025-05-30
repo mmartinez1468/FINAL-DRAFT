@@ -467,10 +467,20 @@
         <div class="demo-container">
             <!-- Image Comparison Slider Component -->
             <div class="comparison-slider">
-                <div class="overlay dual-knife-edge-border"><strong>Custom Coded</strong></div>
-                <!-- Use video element for video files -->
-                <video autoplay muted loop>
+                <div class="overlay"><strong>Custom Coded</strong></div>
+                <!-- Safari-compatible video element -->
+                <video 
+                    autoplay 
+                    muted 
+                    loop 
+                    playsinline 
+                    preload="metadata"
+                    webkit-playsinline
+                    x-webkit-airplay="allow"
+                    poster="images/video-poster.jpg">
                     <source src="images/pricing-after.mp4" type="video/mp4">
+                    <!-- Fallback image for very old browsers or if video fails -->
+                    <img src="images/pricing-after-fallback.jpg" alt="Custom coded website example">
                 </video>
                 
                 <div class="resize">

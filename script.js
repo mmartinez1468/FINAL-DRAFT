@@ -5,6 +5,15 @@ const navMenu = document.querySelector('.nav-menu');
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
+    
+    // Reset all dropdown states when toggling hamburger menu
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(toggle => {
+        toggle.classList.remove('active');
+        if (toggle.nextElementSibling) {
+            toggle.nextElementSibling.classList.remove('active');
+        }
+    });
 });
 
 // Mobile dropdown toggles
@@ -38,6 +47,14 @@ document.querySelectorAll('.nav-link:not(.dropdown-toggle)').forEach(link => {
         if (hamburger.classList.contains('active')) {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
+            
+            // Also reset dropdown states
+            dropdownToggles.forEach(toggle => {
+                toggle.classList.remove('active');
+                if (toggle.nextElementSibling) {
+                    toggle.nextElementSibling.classList.remove('active');
+                }
+            });
         }
     });
 });
@@ -73,6 +90,25 @@ window.addEventListener('resize', () => {
         });
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // IIFE to isolate the slider code and prevent conflicts with navbar
 (function() {
@@ -826,6 +862,24 @@ function initNavbarBlur() {
 document.addEventListener('DOMContentLoaded', () => {
     initNavbarBlur();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Image Comparison Slider - Vanilla JavaScript
 function initImageComparisonSliders() {

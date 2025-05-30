@@ -295,6 +295,7 @@ th, td {
 .delay-100 { transition-delay: 0.1s; }
 .delay-200 { transition-delay: 0.2s; }
 .delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
 .delay-500 { transition-delay: 0.5s; }
 .delay-600 { transition-delay: 0.6s; }
 .delay-700 { transition-delay: 0.7s; }
@@ -635,6 +636,7 @@ body.light-mode section {
         width: auto;
         height: auto;
         padding: 0;
+        margin-right: 2rem;
         box-shadow: none;
         overflow-y: visible;
     }
@@ -732,6 +734,7 @@ body.light-mode section {
     .theme-toggle {
         margin-left: unset !important;
     }
+
 }
 
 @media screen and (min-width: 1248px) {

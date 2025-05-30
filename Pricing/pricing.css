@@ -1998,3 +1998,312 @@ body.light-mode .pricing-popular {
 .black-blue-gradient {
   background: linear-gradient(135deg, #000000, #02478d);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   13. FOOTER
+========================================================================== */
+.footer-section {
+          background: #151414;
+          position: relative;
+        }
+        .footer-container {
+          padding: 1rem;
+        }
+        .footer-cta {
+          border-bottom: 1px solid #373636;
+          padding-bottom: 1rem;
+        }
+        .single-cta svg {
+          color: #4b0082;
+          height: 25px;
+          float: left;
+          margin-top: 5px;
+        }
+        .cta-text {
+          padding-left: 15px;
+          display: inline-block;
+        }
+        .cta-text h4 {
+          color: #fff;
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 2px;
+        }
+        .cta-text span {
+          color: #757575;
+          font-size: 15px;
+        }
+        .footer-content {
+          position: relative;
+          z-index: 2;
+        }
+        .footer-pattern img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 330px;
+          background-size: cover;
+          background-position: 100% 100%;
+        }
+        .footer-logo {
+          margin-bottom: 30px;
+        }
+        .footer-logo img {
+            max-width: 200px;
+            border-radius: 5px;
+        }
+        .footer-text p {
+          margin-bottom: 14px;
+          font-size: 14px;
+          color: #7e7e7e;
+          line-height: 28px;
+        }
+        .footer-social-icon-wrapper {
+          display: flex;
+          padding-bottom: 1rem;
+        }
+        .footer-social-icon span {
+          color: #fff;
+          display: block;
+          font-size: 20px;
+          font-weight: 700;
+          font-family: 'Poppins', sans-serif;
+          margin-bottom: 20px;
+        }
+        .footer-social-icon a {
+          color: #fff;
+          font-size: 16px;
+          margin-right: 15px;
+        }
+        .footer-social-icon svg {
+          height: 40px;
+          width: 40px;
+          text-align: center;
+          line-height: 38px;
+          border-radius: 50%;
+        }
+        .facebook-bg{
+          background: #3B5998;
+        }
+        .twitter-bg{
+          background: #55ACEE;
+        }
+        .google-bg{
+          background: #DD4B39;
+        }
+        .footer-widget {
+          padding-top: 1rem;
+        }
+        .footer-widget-heading h3 {
+          color: #fff;
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 40px;
+          position: relative;
+        }
+        .footer-widget-heading h3::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -15px;
+          height: 2px;
+          width: 50px;
+          background: #4b0082;
+        }
+        .footer-widget ul li {
+          display: inline-block;
+          float: left;
+          width: 50%;
+          margin-bottom: 12px;
+        }
+        .footer-widget ul li a:hover{
+          color: #4b0082;
+        }
+        .footer-widget ul li a {
+          color: #878787;
+          text-transform: capitalize;
+          text-decoration: none;
+        }
+        .subscribe-form {
+          position: relative;
+          overflow: hidden;
+        }
+        .subscribe-form input {
+          width: 100%;
+          padding: 14px 28px;
+          background: #2E2E2E;
+          border: 1px solid #2E2E2E;
+          color: #fff;
+        }
+        .subscribe-form button {
+            position: absolute;
+            right: 0;
+            background: #4b0082;
+            padding: 13px 20px;
+            border: 1px solid #4b0082;
+            top: 0;
+            cursor: pointer;
+        }
+        .subscribe-form button svg {
+          color: #fff;
+          height: 25px;
+          transform: rotate(-6deg);
+        }
+        .copyright-area{
+          background: #202020;
+          padding-top: 1rem;
+        }
+        .copyright-text p {
+          margin: 0;
+          font-size: 14px;
+          color: #878787;
+          text-align: center;
+        }
+        .copyright-text p a{
+          color: #4b0082;
+          text-decoration: none;
+        }
+        .footer-menu li {
+          display: inline-block;
+          margin-left: 20px;
+        }
+        .footer-menu li:hover a{
+          color: #4b0082;
+        }
+        .footer-menu li a {
+          font-size: 14px;
+          color: #878787;
+          text-decoration: none;
+        }
+        .footer-menu ul {
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+/* Updated media query to ensure footer widgets stay on same line and proper CTA positioning */
+@media screen and (min-width: 992px) {
+  .footer-container {
+    max-width: 960px;
+    margin: 0 auto; /* Center the container */
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  /* Footer CTA section - ensure it stays on top and centered */
+  .footer-cta {
+    width: 100%;
+    order: 1;
+  }
+  
+  .footer-cta .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+  /* Footer content section - comes after CTA and centered */
+  .footer-content {
+    width: 100%;
+    order: 2;
+  }
+  
+  .footer-content .row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+  .footer-content .row > [class*="col-"] {
+    flex: 1;
+    max-width: none;
+    margin-bottom: 0;
+  }
+  
+  .footer-widget {
+    height: 100%;
+  }
+}
+
+body.light-mode #contact {
+    margin-top: 10px;
+}
+
+body.light-mode .contact-header {
+    color: var(--colorprimary)
+}
+
+option {
+    color: var(--colorsecondary)
+}

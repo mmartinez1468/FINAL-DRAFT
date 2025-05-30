@@ -1191,7 +1191,7 @@ body.light-mode .dropdown-item-info > p {
     display: none;
     border-radius: 10px;
     padding: .25rem 1.5rem;
-    background-color: rgb(75, 0, 130);
+    background-color: #4b0082;
     color: var(--colorprimary);
     font-size: 1rem;
     font-weight: 500;
@@ -2109,7 +2109,7 @@ body.light-mode .triangle-divider {
     
     .services-intro > h2 {
         font-size: 4rem;
-        line-height: 4rem;
+        line-height: 4.5rem;
     }
 
     .services-card-intro > h2 {
@@ -2416,6 +2416,20 @@ body.light-mode .services-card {
     border: 5px white solid;
     border-radius: 10px;
     box-sizing: border-box;
+    overflow: hidden;
+    
+    /* Prevent selection/highlighting */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    /* Prevent dragging of images/videos */
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
 }
 
 .comparison-slider > img {
@@ -2433,7 +2447,7 @@ body.light-mode .services-card {
     right: 20px;
     background-color: #111;
     border: 1px solid var(--colorborder);
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 10px;
     box-sizing: border-box;
     color: #DDD;
@@ -2560,6 +2574,46 @@ body.light-mode .services-card {
     padding: 2px 4px;
     border-radius: 3px;
     font-family: 'Courier New', monospace;
+}
+
+/* Add these styles to your existing CSS to fix the video overflow */
+
+/* Apply the same styling to video elements as images in comparison slider */
+.comparison-slider > video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    object-fit: cover; /* Ensures video fits properly without distortion */
+}
+
+/* If you need the video in the resize section, add this too */
+.comparison-slider .resize > video {
+    display: block;
+    width: 200%;
+    height: 100%;
+    max-width: none;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+/* Additional fix to ensure the comparison slider container handles video properly */
+.comparison-slider {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    border: 5px white solid;
+    border-radius: 10px;
+    box-sizing: border-box;
+    overflow: hidden; /* This prevents any overflow */
+}
+
+/* Ensure the demo container also constrains the content */
+.demo-container {
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden; /* Additional overflow protection */
+    max-width: 100%; /* Ensure it doesn't exceed container width */
 }
 
 /* CTA Responsive Design */
@@ -2904,7 +2958,7 @@ body.light-mode .cta-intro > span {
           padding-bottom: 1rem;
         }
         .single-cta svg {
-          color: #ff5e14;
+          color: #4b0082;
           height: 25px;
           float: left;
           margin-top: 5px;
@@ -2940,6 +2994,7 @@ body.light-mode .cta-intro > span {
         }
         .footer-logo img {
             max-width: 200px;
+            border-radius: 5px;
         }
         .footer-text p {
           margin-bottom: 14px;
@@ -2997,7 +3052,7 @@ body.light-mode .cta-intro > span {
           bottom: -15px;
           height: 2px;
           width: 50px;
-          background: #ff5e14;
+          background: #4b0082;
         }
         .footer-widget ul li {
           display: inline-block;
@@ -3006,7 +3061,7 @@ body.light-mode .cta-intro > span {
           margin-bottom: 12px;
         }
         .footer-widget ul li a:hover{
-          color: #ff5e14;
+          color: #4b0082;
         }
         .footer-widget ul li a {
           color: #878787;
@@ -3027,9 +3082,9 @@ body.light-mode .cta-intro > span {
         .subscribe-form button {
             position: absolute;
             right: 0;
-            background: #ff5e14;
+            background: #4b0082;
             padding: 13px 20px;
-            border: 1px solid #ff5e14;
+            border: 1px solid #4b0082;
             top: 0;
             cursor: pointer;
         }
@@ -3049,7 +3104,7 @@ body.light-mode .cta-intro > span {
           text-align: center;
         }
         .copyright-text p a{
-          color: #ff5e14;
+          color: #4b0082;
           text-decoration: none;
         }
         .footer-menu li {
@@ -3057,7 +3112,7 @@ body.light-mode .cta-intro > span {
           margin-left: 20px;
         }
         .footer-menu li:hover a{
-          color: #ff5e14;
+          color: #4b0082;
         }
         .footer-menu li a {
           font-size: 14px;

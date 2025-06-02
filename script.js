@@ -1239,3 +1239,434 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Enhanced FAQ functionality with accessibility support
+document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const button = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        
+        // Click event handler
+        button.addEventListener('click', function() {
+            toggleFAQItem(item, button);
+        });
+        
+        // Keyboard event handler for accessibility
+        button.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleFAQItem(item, button);
+            }
+            
+            // Arrow key navigation between FAQ items
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                navigateToNextFAQ(e.key, button);
+            }
+        });
+    });
+    
+    // Function to toggle FAQ item state
+    function toggleFAQItem(item, button) {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other items (accordion behavior)
+        faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+                const otherButton = otherItem.querySelector('.faq-question');
+                
+                otherButton.setAttribute('aria-expanded', 'false');
+                otherItem.setAttribute('aria-expanded', 'false');
+            }
+        });
+        
+        // Toggle current item
+        const newState = !isExpanded;
+        button.setAttribute('aria-expanded', newState);
+        item.setAttribute('aria-expanded', newState);
+        
+        // Announce state change to screen readers
+        if (newState) {
+            announceToScreenReader('FAQ item expanded');
+        } else {
+            announceToScreenReader('FAQ item collapsed');
+        }
+    }
+    
+    // Function to navigate between FAQ items with arrow keys
+    function navigateToNextFAQ(direction, currentButton) {
+        const allButtons = Array.from(document.querySelectorAll('.faq-question'));
+        const currentIndex = allButtons.indexOf(currentButton);
+        
+        let nextIndex;
+        if (direction === 'ArrowDown') {
+            nextIndex = (currentIndex + 1) % allButtons.length;
+        } else {
+            nextIndex = currentIndex === 0 ? allButtons.length - 1 : currentIndex - 1;
+        }
+        
+        allButtons[nextIndex].focus();
+    }
+    
+    // Function to announce messages to screen readers
+    function announceToScreenReader(message) {
+        const announcement = document.createElement('div');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.setAttribute('aria-atomic', 'true');
+        announcement.className = 'sr-only';
+        announcement.textContent = message;
+        
+        // Add to DOM
+        document.body.appendChild(announcement);
+        
+        // Remove after announcement
+        setTimeout(() => {
+            document.body.removeChild(announcement);
+        }, 1000);
+    }
+    
+    // Optional: Close FAQ when clicking outside
+    document.addEventListener('click', function(e) {
+        const isClickInsideFAQ = e.target.closest('.faq-item');
+        
+        if (!isClickInsideFAQ) {
+            faqItems.forEach(item => {
+                const button = item.querySelector('.faq-question');
+                button.setAttribute('aria-expanded', 'false');
+                item.setAttribute('aria-expanded', 'false');
+            });
+        }
+    });
+    
+    // Optional: Handle escape key to close all FAQs
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const focusedElement = document.activeElement;
+            const isInFAQ = focusedElement.closest('.faq-item');
+            
+            if (isInFAQ) {
+                faqItems.forEach(item => {
+                    const button = item.querySelector('.faq-question');
+                    button.setAttribute('aria-expanded', 'false');
+                    item.setAttribute('aria-expanded', 'false');
+                });
+                
+                // Keep focus on the button that was focused
+                if (focusedElement.classList.contains('faq-question')) {
+                    focusedElement.focus();
+                }
+                
+                announceToScreenReader('All FAQ items closed');
+            }
+        }
+    });
+});
+
+// Optional: Add smooth scrolling when FAQ items expand
+function addSmoothScrolling() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .faq-answer {
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .faq-answer {
+                transition: none;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Initialize smooth scrolling if not already handled in CSS
+addSmoothScrolling();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Function to check which step is at 50% viewport
+        function updateActiveStep() {
+            const steps = document.querySelectorAll('.process-step');
+            const viewportCenter = window.innerHeight * 0.5;
+            
+            let activeStep = null;
+            let minDistance = Infinity;
+            let fallbackStep = steps[0]; // Default to first step
+            
+            steps.forEach(step => {
+                const rect = step.getBoundingClientRect();
+                const stepTop = rect.top;
+                const stepBottom = rect.bottom;
+                const distanceFromCenter = Math.abs(stepTop - viewportCenter);
+                
+                // Find the step closest to 50% viewport
+                if (distanceFromCenter < minDistance && stepTop <= viewportCenter && stepBottom >= viewportCenter) {
+                    minDistance = distanceFromCenter;
+                    activeStep = step;
+                }
+                
+                // Update fallback to the closest step overall
+                if (distanceFromCenter < minDistance || activeStep === null) {
+                    const stepCenter = stepTop + (stepBottom - stepTop) / 2;
+                    if (stepCenter <= viewportCenter + 100) { // Small buffer
+                        fallbackStep = step;
+                    }
+                }
+            });
+            
+            // If no step is directly intersecting viewport center, find the closest one
+            if (!activeStep) {
+                let closestDistance = Infinity;
+                steps.forEach(step => {
+                    const rect = step.getBoundingClientRect();
+                    const stepCenter = rect.top + (rect.bottom - rect.top) / 2;
+                    const distance = Math.abs(stepCenter - viewportCenter);
+                    
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        activeStep = step;
+                    }
+                });
+            }
+            
+            // Remove active class from all steps
+            steps.forEach(step => step.classList.remove('active'));
+            
+            // Add active class to the determined step (always have one active)
+            const stepToActivate = activeStep || fallbackStep;
+            if (stepToActivate) {
+                stepToActivate.classList.add('active');
+            }
+        }
+
+        // Update on scroll
+        window.addEventListener('scroll', updateActiveStep);
+
+        // Update on load
+        window.addEventListener('load', updateActiveStep);
+
+        // Update on resize
+        window.addEventListener('resize', updateActiveStep);
+
+        // Smooth scroll behavior for buttons
+        document.querySelectorAll('.landing-button-1').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Add click effect
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = '';
+                }, 150);
+            });
+        });
